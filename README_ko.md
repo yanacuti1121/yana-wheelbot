@@ -68,13 +68,3 @@ Co., Ltd.입니다. LICENSE 파일은 라이선스 요구사항에 따라 원본
 [docs/origin-story_ko.md](docs/origin-story_ko.md)를 참고하세요.
 
 아이디어나 제안이 있다면 이 저장소에 Issue를 열어주세요.
-
-## Star History
-
-<a href="https://star-history.com/#yanacuti1121/yana-wheelbot&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=yanacuti1121/yana-wheelbot&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=yanacuti1121/yana-wheelbot&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=yanacuti1121/yana-wheelbot&type=Date" />
- </picture>
-</a>

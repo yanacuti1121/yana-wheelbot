@@ -70,13 +70,3 @@ gốc của họ theo đúng yêu cầu giấy phép. Repo này là một nhánh
 kế thừa, phần nào tự xây mới.
 
 Nếu anh có ý tưởng hay đề xuất gì, hãy mở Issue trên repo này.
-
-## Star History
-
-<a href="https://star-history.com/#yanacuti1121/yana-wheelbot&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=yanacuti1121/yana-wheelbot&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=yanacuti1121/yana-wheelbot&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=yanacuti1121/yana-wheelbot&type=Date" />
- </picture>
-</a>
