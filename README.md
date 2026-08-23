@@ -6,8 +6,6 @@ ESP32-S3 voice-AI robotics platform: motor/servo control, anti-fall safety,
 and MCP-based voice + web control, running on Yana's own fork of the
 XiaoZhi AI Chatbot firmware base.
 
-<img src="docs/mcp-based-graph.jpg" alt="Control everything via MCP" width="320">
-
 ## Yana Wheelbot
 
 <img src="main/boards/yana-wheelbot/wiring-diagram.svg" alt="Yana Wheelbot wiring diagram" width="480">

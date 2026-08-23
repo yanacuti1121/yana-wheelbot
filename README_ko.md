@@ -6,8 +6,6 @@ ESP32-S3 음성 AI 로보틱스 플랫폼 — 모터/서보 제어, 낙하 방�
 음성 + 웹 제어를 제공하며, Yana가 XiaoZhi AI Chatbot 펌웨어를 기반으로 독립
 포크한 위에서 동작합니다.
 
-<img src="docs/mcp-based-graph.jpg" alt="MCP로 모든 것을 제어" width="320">
-
 ## Yana Wheelbot
 
 <img src="main/boards/yana-wheelbot/wiring-diagram.svg" alt="Yana Wheelbot 배선도" width="480">

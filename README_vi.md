@@ -6,8 +6,6 @@ Nền tảng robot voice-AI ESP32-S3: điều khiển động cơ/servo, an toà
 rơi, và điều khiển qua giọng nói + web dựa trên MCP, chạy trên bản fork
 riêng của Yana từ nền firmware XiaoZhi AI Chatbot.
 
-<img src="docs/mcp-based-graph.jpg" alt="Điều khiển mọi thứ qua MCP" width="320">
-
 ## Yana Wheelbot
 
 <img src="main/boards/yana-wheelbot/wiring-diagram.svg" alt="Sơ đồ đấu nối Yana Wheelbot" width="480">
