@@ -1,6 +1,6 @@
 # Hướng dẫn in và lắp chassis Yana Wheelbot
 
-([English](README.md) | Tiếng Việt | [한국어](README_ko.md))
+([English](CHASSIS_GUIDE.md) | Tiếng Việt | [한국어](CHASSIS_GUIDE_ko.md))
 
 Tài liệu này dành cho chassis:
 

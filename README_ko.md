@@ -22,7 +22,9 @@ ESP32-S3 음성 AI 로보틱스 플랫폼 — 모터/서보 제어, 낙하 방�
   [Tiếng Việt](main/boards/yana-wheelbot/README_vi.md)
 - 웹 제어 패널 (한/영/베 다국어 지원): [apps/controller-web](apps/controller-web)
 - 3D 프린트 섀시 (BOM, 배선, 조립 가이드):
-  [main/boards/yana-wheelbot/chassis](main/boards/yana-wheelbot/chassis)
+  [한국어](main/boards/yana-wheelbot/chassis/CHASSIS_GUIDE_ko.md) ·
+  [English](main/boards/yana-wheelbot/chassis/CHASSIS_GUIDE.md) ·
+  [Tiếng Việt](main/boards/yana-wheelbot/chassis/CHASSIS_GUIDE_vi.md)
 
 **솔직한 현재 상태:** `yana-wheelbot`은 빌드 검증만 되어 있습니다 — 깔끔하게
 컴파일되고 기본 GPIO 값은 실제 공개된 참조 설계와 대조 확인되었지만,

@@ -1,6 +1,6 @@
 # Yana Wheelbot Chassis — Print & Assembly Guide
 
-(English | [Tiếng Việt](README_vi.md) | [한국어](README_ko.md))
+(English | [Tiếng Việt](CHASSIS_GUIDE_vi.md) | [한국어](CHASSIS_GUIDE_ko.md))
 
 This document covers the chassis:
 

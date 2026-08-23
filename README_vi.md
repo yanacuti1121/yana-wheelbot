@@ -23,7 +23,9 @@ riêng của Yana từ nền firmware XiaoZhi AI Chatbot.
   [한국어](main/boards/yana-wheelbot/README_ko.md)
 - Bảng điều khiển web, đa ngôn ngữ EN/VI/KO: [apps/controller-web](apps/controller-web)
 - Chassis in 3D (BOM, đấu dây, hướng dẫn lắp ráp):
-  [main/boards/yana-wheelbot/chassis](main/boards/yana-wheelbot/chassis)
+  [Tiếng Việt](main/boards/yana-wheelbot/chassis/CHASSIS_GUIDE_vi.md) ·
+  [English](main/boards/yana-wheelbot/chassis/CHASSIS_GUIDE.md) ·
+  [한국어](main/boards/yana-wheelbot/chassis/CHASSIS_GUIDE_ko.md)
 
 **Trạng thái thật:** `yana-wheelbot` mới chỉ build-verified — compile
 sạch, chân GPIO mặc định đã đối chiếu với một thiết kế tham khảo công khai

@@ -1,6 +1,6 @@
 # Yana Wheelbot 섀시 — 출력 및 조립 가이드
 
-([English](README.md) | [Tiếng Việt](README_vi.md) | 한국어)
+([English](CHASSIS_GUIDE.md) | [Tiếng Việt](CHASSIS_GUIDE_vi.md) | 한국어)
 
 이 문서는 아래 섀시를 다룹니다.
 

@@ -22,7 +22,9 @@ XiaoZhi AI Chatbot firmware base.
   [한국어](main/boards/yana-wheelbot/README_ko.md)
 - Browser control panel, localized EN/VI/KO: [apps/controller-web](apps/controller-web)
 - Printable chassis (BOM, wiring, assembly guide):
-  [main/boards/yana-wheelbot/chassis](main/boards/yana-wheelbot/chassis)
+  [main/boards/yana-wheelbot/chassis/CHASSIS_GUIDE.md](main/boards/yana-wheelbot/chassis/CHASSIS_GUIDE.md) ·
+  [Tiếng Việt](main/boards/yana-wheelbot/chassis/CHASSIS_GUIDE_vi.md) ·
+  [한국어](main/boards/yana-wheelbot/chassis/CHASSIS_GUIDE_ko.md)
 
 **Honest status:** `yana-wheelbot` is build-verified only — it compiles
 cleanly, and its GPIO defaults are cross-checked against a real published
