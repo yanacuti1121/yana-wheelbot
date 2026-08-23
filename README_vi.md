@@ -1,7 +1,5 @@
 
-+422
--0
-main/boards/yana-wheelbot/chassis/README.md
+
 # Yana Wheelbot Chassis
 
 [Hướng dẫn in, BOM, đấu nối và lắp đặt bằng tiếng Việt](README_vi.md)
