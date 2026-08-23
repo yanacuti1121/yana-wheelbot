@@ -1,113 +1,183 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1050" font-family="Helvetica, Arial, sans-serif">
-  <rect x="0" y="0" width="1600" height="1050" fill="#0f1720"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1080" font-family="Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="1600" height="1080" fill="#0f1720"/>
 
-  <text x="40" y="50" font-size="30" font-weight="700" fill="#e6f6ff">Yana Wheelbot — Wiring Diagram (default config)</text>
-  <text x="40" y="76" font-size="15" fill="#8fb3c7">GPIO numbers confirmed against the KST AI Robot's public wiring diagram (ai.kenhsangtao.com) -- own layout/artwork, not a copy of theirs.</text>
+  <text x="40" y="40" font-size="28" font-weight="700" fill="#e6f6ff">Yana Wheelbot — Wiring Diagram (default config)</text>
+  <text x="40" y="64" font-size="14" fill="#8fb3c7">GPIO numbers confirmed against the KST AI Robot's public wiring diagram (ai.kenhsangtao.com) -- own layout/artwork, one line per pin, not a copy of theirs.</text>
+
+  <!-- shared 3V3 rail -->
+  <line x1="120" y1="90" x2="1480" y2="90" stroke="#8fb3c7" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <circle cx="120" cy="90" r="4" fill="#8fb3c7"/>
+  <text x="20" y="94" font-size="13" font-weight="700" fill="#8fb3c7">3V3</text>
+
+  <!-- shared GND rail -->
+  <line x1="120" y1="1020" x2="1480" y2="1020" stroke="#7d8994" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <circle cx="120" cy="1020" r="4" fill="#7d8994"/>
+  <text x="20" y="1024" font-size="13" font-weight="700" fill="#7d8994">GND</text>
 
   <!-- MCU box -->
-  <rect x="660" y="380" width="280" height="290" rx="14" fill="#16232e" stroke="#2fa6d9" stroke-width="2"/>
-  <text x="800" y="500" font-size="22" font-weight="700" fill="#e6f6ff" text-anchor="middle">ESP32-S3</text>
-  <text x="800" y="524" font-size="14" fill="#8fb3c7" text-anchor="middle">Yana Wheelbot</text>
-  <text x="800" y="546" font-size="13" fill="#5b7d8f" text-anchor="middle">GPIO0 = boot button</text>
+  <rect x="660" y="400" width="280" height="270" rx="14" fill="#16232e" stroke="#2fa6d9" stroke-width="2"/>
+  <text x="800" y="510" font-size="22" font-weight="700" fill="#e6f6ff" text-anchor="middle">ESP32-S3</text>
+  <text x="800" y="534" font-size="14" fill="#8fb3c7" text-anchor="middle">WROOM-1 N16R8</text>
+  <text x="800" y="556" font-size="13" fill="#5b7d8f" text-anchor="middle">Yana Wheelbot</text>
+  <rect x="770" y="590" width="60" height="24" rx="4" fill="#0f1720" stroke="#2fa6d9"/>
+  <text x="800" y="606" font-size="12" fill="#8fb3c7" text-anchor="middle">USB-C</text>
+  <text x="800" y="640" font-size="12" fill="#5b7d8f" text-anchor="middle">GPIO0 = boot button</text>
 
-  <!-- helper macro-ish groups via repeated rect/text; left column boxes -->
+  <!-- ============ LEFT COLUMN ============ -->
+
   <!-- INMP441 -->
-  <rect x="40" y="90" width="260" height="120" rx="10" fill="#122b1e" stroke="#3fbf7f" stroke-width="2"/>
-  <text x="60" y="118" font-size="17" font-weight="700" fill="#c9f5df">INMP441 (mic, I2S)</text>
-  <text x="60" y="142" font-size="13" fill="#9fe3bd">WS  → GPIO4</text>
-  <text x="60" y="162" font-size="13" fill="#9fe3bd">SCK → GPIO5</text>
-  <text x="60" y="182" font-size="13" fill="#9fe3bd">SD  → GPIO6</text>
-  <text x="60" y="200" font-size="12" fill="#5b8f74">VCC→3V3 · L/R→GND</text>
+  <rect x="40" y="110" width="260" height="130" rx="10" fill="#122b1e" stroke="#3fbf7f" stroke-width="2"/>
+  <text x="60" y="138" font-size="17" font-weight="700" fill="#c9f5df">INMP441 (mic, I2S)</text>
+  <text x="60" y="162" font-size="13" fill="#9fe3bd">VCC → 3V3</text>
+  <text x="60" y="182" font-size="13" fill="#9fe3bd">WS  → GPIO4</text>
+  <text x="60" y="202" font-size="13" fill="#9fe3bd">SCK → GPIO5</text>
+  <text x="60" y="222" font-size="13" fill="#9fe3bd">SD  → GPIO6</text>
+  <line x1="300" y1="162" x2="120" y2="90" stroke="#3fbf7f" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="300" y1="182" x2="660" y2="420" stroke="#3fbf7f" stroke-width="2"/>
+  <text x="470" y="288" font-size="12" fill="#9fe3bd">GPIO4</text>
+  <line x1="300" y1="202" x2="660" y2="440" stroke="#3fbf7f" stroke-width="2"/>
+  <text x="470" y="312" font-size="12" fill="#9fe3bd">GPIO5</text>
+  <line x1="300" y1="222" x2="660" y2="460" stroke="#3fbf7f" stroke-width="2"/>
+  <text x="470" y="336" font-size="12" fill="#9fe3bd">GPIO6</text>
+  <text x="60" y="230" font-size="11" fill="#5b8f74">L/R → GND (tied low)</text>
 
   <!-- MAX98357A -->
-  <rect x="40" y="230" width="260" height="140" rx="10" fill="#122233" stroke="#4a8fe0" stroke-width="2"/>
-  <text x="60" y="258" font-size="17" font-weight="700" fill="#cfe3ff">MAX98357A (speaker amp, I2S)</text>
-  <text x="60" y="282" font-size="13" fill="#a9c9f2">DIN  → GPIO17</text>
-  <text x="60" y="302" font-size="13" fill="#a9c9f2">BCLK → GPIO16</text>
-  <text x="60" y="322" font-size="13" fill="#a9c9f2">LRC  → GPIO15</text>
-  <text x="60" y="342" font-size="12" fill="#5b7fa3">VIN → 5V riêng · GAIN→GND · SD→VIN</text>
-  <text x="60" y="360" font-size="12" fill="#e0a94a">⚠ needs its own strong 5V rail</text>
+  <rect x="40" y="260" width="260" height="150" rx="10" fill="#122233" stroke="#4a8fe0" stroke-width="2"/>
+  <text x="60" y="288" font-size="17" font-weight="700" fill="#cfe3ff">MAX98357A (speaker amp, I2S)</text>
+  <text x="60" y="312" font-size="13" fill="#a9c9f2">VIN  → own 5V rail</text>
+  <text x="60" y="332" font-size="13" fill="#a9c9f2">DIN  → GPIO17</text>
+  <text x="60" y="352" font-size="13" fill="#a9c9f2">BCLK → GPIO16</text>
+  <text x="60" y="372" font-size="13" fill="#a9c9f2">LRC  → GPIO15</text>
+  <text x="60" y="392" font-size="11" fill="#5b7fa3">GAIN→GND · SD→VIN (own rail, not MCU)</text>
+  <line x1="300" y1="332" x2="660" y2="480" stroke="#4a8fe0" stroke-width="2"/>
+  <text x="470" y="404" font-size="12" fill="#a9c9f2">GPIO17</text>
+  <line x1="300" y1="352" x2="660" y2="500" stroke="#4a8fe0" stroke-width="2"/>
+  <text x="470" y="428" font-size="12" fill="#a9c9f2">GPIO16</text>
+  <line x1="300" y1="372" x2="660" y2="520" stroke="#4a8fe0" stroke-width="2"/>
+  <text x="470" y="452" font-size="12" fill="#a9c9f2">GPIO15</text>
+  <line x1="300" y1="392" x2="120" y2="1020" stroke="#4a8fe0" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="60" y="416" font-size="11" fill="#e0a94a">⚠ needs its own strong 5V rail</text>
 
   <!-- TTP223 -->
-  <rect x="40" y="390" width="260" height="110" rx="10" fill="#2a2016" stroke="#e0b24a" stroke-width="2"/>
-  <text x="60" y="418" font-size="17" font-weight="700" fill="#ffe9b8">TTP223 (touch sensor)</text>
-  <text x="60" y="442" font-size="13" fill="#f2d79a">OUT → GPIO7</text>
-  <text x="60" y="462" font-size="12" fill="#b89457">VCC→3V3 · GND→GND</text>
-  <text x="60" y="482" font-size="12" fill="#b89457">double-tap toggles chat</text>
+  <rect x="40" y="430" width="260" height="100" rx="10" fill="#2a2016" stroke="#e0b24a" stroke-width="2"/>
+  <text x="60" y="458" font-size="17" font-weight="700" fill="#ffe9b8">TTP223 (touch sensor)</text>
+  <text x="60" y="482" font-size="13" fill="#f2d79a">VCC → 3V3</text>
+  <text x="60" y="502" font-size="13" fill="#f2d79a">OUT → GPIO7</text>
+  <text x="60" y="520" font-size="11" fill="#b89457">GND → GND · double-tap toggles chat</text>
+  <line x1="300" y1="482" x2="120" y2="90" stroke="#e0b24a" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="300" y1="502" x2="660" y2="540" stroke="#e0b24a" stroke-width="2"/>
+  <text x="470" y="516" font-size="12" fill="#f2d79a">GPIO7</text>
+  <line x1="300" y1="520" x2="120" y2="1020" stroke="#e0b24a" stroke-width="1.5" stroke-dasharray="4,3"/>
 
   <!-- ToF sensor -->
-  <rect x="40" y="520" width="260" height="130" rx="10" fill="#122233" stroke="#4a8fe0" stroke-width="2"/>
-  <text x="60" y="548" font-size="17" font-weight="700" fill="#cfe3ff">ToF anti-fall (I2C)</text>
-  <text x="60" y="570" font-size="13" fill="#a9c9f2">VL53L0X (default) or VL6180X</text>
-  <text x="60" y="594" font-size="13" fill="#a9c9f2">SDA → GPIO1</text>
-  <text x="60" y="614" font-size="13" fill="#a9c9f2">SCL → GPIO2</text>
-  <text x="60" y="636" font-size="12" fill="#5b7fa3">VCC→3V3 · GND→GND</text>
+  <rect x="40" y="550" width="260" height="140" rx="10" fill="#122233" stroke="#4a8fe0" stroke-width="2"/>
+  <text x="60" y="578" font-size="17" font-weight="700" fill="#cfe3ff">ToF anti-fall (I2C)</text>
+  <text x="60" y="598" font-size="12" fill="#a9c9f2">VL53L0X (default) or VL6180X</text>
+  <text x="60" y="620" font-size="13" fill="#a9c9f2">VCC → 3V3</text>
+  <text x="60" y="640" font-size="13" fill="#a9c9f2">SDA → GPIO1</text>
+  <text x="60" y="660" font-size="13" fill="#a9c9f2">SCL → GPIO2</text>
+  <text x="60" y="678" font-size="11" fill="#5b7fa3">GND → GND</text>
+  <line x1="300" y1="620" x2="120" y2="90" stroke="#4a8fe0" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="300" y1="640" x2="660" y2="580" stroke="#4a8fe0" stroke-width="2"/>
+  <text x="470" y="600" font-size="12" fill="#a9c9f2">GPIO1</text>
+  <line x1="300" y1="660" x2="660" y2="600" stroke="#4a8fe0" stroke-width="2"/>
+  <text x="470" y="624" font-size="12" fill="#a9c9f2">GPIO2</text>
+  <line x1="300" y1="678" x2="120" y2="1020" stroke="#4a8fe0" stroke-width="1.5" stroke-dasharray="4,3"/>
 
   <!-- L298N (optional, dashed) -->
-  <rect x="40" y="670" width="260" height="150" rx="10" fill="#1a1a1a" stroke="#666" stroke-width="2" stroke-dasharray="6,5"/>
-  <text x="60" y="698" font-size="17" font-weight="700" fill="#bbb">L298N (optional motor driver)</text>
-  <text x="60" y="722" font-size="12" fill="#999">used instead of wheel servos</text>
-  <text x="60" y="744" font-size="13" fill="#bbb">IN1→38 · IN2→39</text>
-  <text x="60" y="764" font-size="13" fill="#bbb">IN3→40 · IN4→41</text>
-  <text x="60" y="786" font-size="12" fill="#888">remappable via self.wheelbot.set_motor_pins</text>
-  <text x="60" y="806" font-size="12" fill="#e0a94a">⚠ IN1-4 convention unverified — see README</text>
+  <rect x="40" y="710" width="260" height="180" rx="10" fill="#1a1a1a" stroke="#666" stroke-width="2" stroke-dasharray="6,5"/>
+  <text x="60" y="738" font-size="17" font-weight="700" fill="#bbb">L298N (optional motor driver)</text>
+  <text x="60" y="758" font-size="11" fill="#999">used instead of wheel servos</text>
+  <text x="60" y="782" font-size="13" fill="#bbb">IN1 → GPIO38</text>
+  <text x="60" y="802" font-size="13" fill="#bbb">IN2 → GPIO39</text>
+  <text x="60" y="822" font-size="13" fill="#bbb">IN3 → GPIO40</text>
+  <text x="60" y="842" font-size="13" fill="#bbb">IN4 → GPIO41</text>
+  <text x="60" y="862" font-size="11" fill="#888">remappable via self.wheelbot.set_motor_pins</text>
+  <text x="60" y="880" font-size="11" fill="#e0a94a">⚠ IN1-4 convention unverified — see README</text>
+  <line x1="300" y1="782" x2="660" y2="620" stroke="#777" stroke-width="1.5" stroke-dasharray="6,5"/>
+  <text x="470" y="700" font-size="12" fill="#999">GPIO38</text>
+  <line x1="300" y1="802" x2="660" y2="635" stroke="#777" stroke-width="1.5" stroke-dasharray="6,5"/>
+  <text x="470" y="718" font-size="12" fill="#999">GPIO39</text>
+  <line x1="300" y1="822" x2="660" y2="650" stroke="#777" stroke-width="1.5" stroke-dasharray="6,5"/>
+  <text x="470" y="736" font-size="12" fill="#999">GPIO40</text>
+  <line x1="300" y1="842" x2="660" y2="665" stroke="#777" stroke-width="1.5" stroke-dasharray="6,5"/>
+  <text x="470" y="754" font-size="12" fill="#999">GPIO41</text>
 
-  <!-- Right column -->
+  <!-- ============ RIGHT COLUMN ============ -->
+
   <!-- Display -->
-  <rect x="1300" y="90" width="260" height="170" rx="10" fill="#241733" stroke="#a06ee0" stroke-width="2"/>
-  <text x="1320" y="118" font-size="17" font-weight="700" fill="#e6d4ff">Display (SPI 128x160)</text>
-  <text x="1320" y="140" font-size="13" fill="#cbb0ea">ST7789 (default) or ST7735</text>
-  <text x="1320" y="162" font-size="13" fill="#cbb0ea">MOSI→11 · CLK→12</text>
-  <text x="1320" y="182" font-size="13" fill="#cbb0ea">DC→10 · CS→13 · RST→14</text>
-  <text x="1320" y="204" font-size="12" fill="#8a6bad">VCC→3V3 · Backlight→GPIO9 (own pick)</text>
-  <text x="1320" y="224" font-size="12" fill="#8a6bad">KST's module ties BL straight to 3V3</text>
-  <text x="1320" y="244" font-size="12" fill="#8a6bad">orientation switch persists + reboots</text>
+  <rect x="1300" y="110" width="260" height="200" rx="10" fill="#241733" stroke="#a06ee0" stroke-width="2"/>
+  <text x="1320" y="138" font-size="17" font-weight="700" fill="#e6d4ff">Display (SPI 128x160)</text>
+  <text x="1320" y="160" font-size="12" fill="#cbb0ea">ST7789 (default) or ST7735</text>
+  <text x="1320" y="182" font-size="13" fill="#cbb0ea">VCC  → 3V3</text>
+  <text x="1320" y="202" font-size="13" fill="#cbb0ea">MOSI → GPIO11</text>
+  <text x="1320" y="222" font-size="13" fill="#cbb0ea">CLK  → GPIO12</text>
+  <text x="1320" y="242" font-size="13" fill="#cbb0ea">DC   → GPIO10</text>
+  <text x="1320" y="262" font-size="13" fill="#cbb0ea">CS   → GPIO13</text>
+  <text x="1320" y="282" font-size="13" fill="#cbb0ea">RST  → GPIO14</text>
+  <text x="1320" y="300" font-size="11" fill="#8a6bad">Backlight → GPIO9 (own pick; KST ties BL to 3V3)</text>
+  <line x1="1300" y1="182" x2="1480" y2="90" stroke="#a06ee0" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="1300" y1="202" x2="940" y2="420" stroke="#a06ee0" stroke-width="2"/>
+  <text x="1080" y="288" font-size="12" fill="#cbb0ea" text-anchor="end">GPIO11</text>
+  <line x1="1300" y1="222" x2="940" y2="440" stroke="#a06ee0" stroke-width="2"/>
+  <text x="1080" y="312" font-size="12" fill="#cbb0ea" text-anchor="end">GPIO12</text>
+  <line x1="1300" y1="242" x2="940" y2="460" stroke="#a06ee0" stroke-width="2"/>
+  <text x="1080" y="336" font-size="12" fill="#cbb0ea" text-anchor="end">GPIO10</text>
+  <line x1="1300" y1="262" x2="940" y2="480" stroke="#a06ee0" stroke-width="2"/>
+  <text x="1080" y="360" font-size="12" fill="#cbb0ea" text-anchor="end">GPIO13</text>
+  <line x1="1300" y1="282" x2="940" y2="500" stroke="#a06ee0" stroke-width="2"/>
+  <text x="1080" y="384" font-size="12" fill="#cbb0ea" text-anchor="end">GPIO14</text>
+  <line x1="1300" y1="300" x2="940" y2="520" stroke="#a06ee0" stroke-width="2"/>
+  <text x="1080" y="408" font-size="12" fill="#cbb0ea" text-anchor="end">GPIO9</text>
 
   <!-- LED -->
-  <rect x="1300" y="280" width="260" height="90" rx="10" fill="#332512" stroke="#e0a04a" stroke-width="2"/>
-  <text x="1320" y="308" font-size="17" font-weight="700" fill="#ffd9a0">LED (left/right)</text>
-  <text x="1320" y="332" font-size="13" fill="#f0c080">Left → GPIO3</text>
-  <text x="1320" y="352" font-size="13" fill="#f0c080">Right → GPIO18</text>
+  <rect x="1300" y="330" width="260" height="90" rx="10" fill="#332512" stroke="#e0a04a" stroke-width="2"/>
+  <text x="1320" y="358" font-size="17" font-weight="700" fill="#ffd9a0">LED (left/right)</text>
+  <text x="1320" y="382" font-size="13" fill="#f0c080">Left  → GPIO3</text>
+  <text x="1320" y="402" font-size="13" fill="#f0c080">Right → GPIO18</text>
+  <line x1="1300" y1="382" x2="940" y2="540" stroke="#e0a04a" stroke-width="2"/>
+  <text x="1080" y="440" font-size="12" fill="#f0c080" text-anchor="end">GPIO3</text>
+  <line x1="1300" y1="402" x2="940" y2="560" stroke="#e0a04a" stroke-width="2"/>
+  <text x="1080" y="464" font-size="12" fill="#f0c080" text-anchor="end">GPIO18</text>
 
   <!-- Wheel servo -->
-  <rect x="1300" y="390" width="260" height="110" rx="10" fill="#332512" stroke="#e0a04a" stroke-width="2"/>
-  <text x="1320" y="418" font-size="17" font-weight="700" fill="#ffd9a0">Wheel servo (360°)</text>
-  <text x="1320" y="442" font-size="13" fill="#f0c080">Left → GPIO47</text>
-  <text x="1320" y="462" font-size="13" fill="#f0c080">Right → GPIO45</text>
-  <text x="1320" y="484" font-size="12" fill="#b8905c">⚠ own 5V rail · GND shared</text>
+  <rect x="1300" y="440" width="260" height="130" rx="10" fill="#332512" stroke="#e0a04a" stroke-width="2"/>
+  <text x="1320" y="468" font-size="17" font-weight="700" fill="#ffd9a0">Wheel servo (360°)</text>
+  <text x="1320" y="492" font-size="13" fill="#f0c080">Left  → GPIO47</text>
+  <text x="1320" y="512" font-size="13" fill="#f0c080">Right → GPIO45</text>
+  <text x="1320" y="532" font-size="11" fill="#b8905c">own 5V rail</text>
+  <text x="1320" y="550" font-size="11" fill="#b8905c">GND → shared GND</text>
+  <line x1="1300" y1="492" x2="940" y2="580" stroke="#e0a04a" stroke-width="2"/>
+  <text x="1080" y="488" font-size="12" fill="#f0c080" text-anchor="end">GPIO47</text>
+  <line x1="1300" y1="512" x2="940" y2="600" stroke="#e0a04a" stroke-width="2"/>
+  <text x="1080" y="512" font-size="12" fill="#f0c080" text-anchor="end">GPIO45</text>
+  <line x1="1300" y1="550" x2="1480" y2="1020" stroke="#e0a04a" stroke-width="1.5" stroke-dasharray="4,3"/>
 
   <!-- Arm/Neck servo -->
-  <rect x="1300" y="520" width="260" height="110" rx="10" fill="#331b2c" stroke="#e04a9c" stroke-width="2"/>
-  <text x="1320" y="548" font-size="17" font-weight="700" fill="#ffb8e0">Arm / Neck servo</text>
-  <text x="1320" y="572" font-size="13" fill="#f0a0cc">Arm → GPIO20</text>
-  <text x="1320" y="592" font-size="13" fill="#f0a0cc">Neck → GPIO21</text>
-  <text x="1320" y="614" font-size="12" fill="#b8749c">⚠ own 5V rail · GND shared</text>
+  <rect x="1300" y="590" width="260" height="130" rx="10" fill="#331b2c" stroke="#e04a9c" stroke-width="2"/>
+  <text x="1320" y="618" font-size="17" font-weight="700" fill="#ffb8e0">Arm / Neck servo</text>
+  <text x="1320" y="642" font-size="13" fill="#f0a0cc">Arm  → GPIO20</text>
+  <text x="1320" y="662" font-size="13" fill="#f0a0cc">Neck → GPIO21</text>
+  <text x="1320" y="682" font-size="11" fill="#b8749c">own 5V rail</text>
+  <text x="1320" y="700" font-size="11" fill="#b8749c">GND → shared GND</text>
+  <line x1="1300" y1="642" x2="940" y2="620" stroke="#e04a9c" stroke-width="2"/>
+  <text x="1080" y="628" font-size="12" fill="#f0a0cc" text-anchor="end">GPIO20</text>
+  <line x1="1300" y1="662" x2="940" y2="640" stroke="#e04a9c" stroke-width="2"/>
+  <text x="1080" y="648" font-size="12" fill="#f0a0cc" text-anchor="end">GPIO21</text>
+  <line x1="1300" y1="700" x2="1480" y2="1020" stroke="#e04a9c" stroke-width="1.5" stroke-dasharray="4,3"/>
 
   <!-- Power -->
-  <rect x="1300" y="650" width="260" height="170" rx="10" fill="#1f2a17" stroke="#7fbf3f" stroke-width="2"/>
-  <text x="1320" y="678" font-size="17" font-weight="700" fill="#d9f2b8">Power</text>
-  <text x="1320" y="700" font-size="13" fill="#bde08a">Li-ion/LiPo 3.7V ~2000mAh</text>
-  <text x="1320" y="720" font-size="13" fill="#bde08a">TP4056 (charge + 5V boost)</text>
-  <text x="1320" y="740" font-size="13" fill="#bde08a">ON/OFF switch</text>
-  <text x="1320" y="762" font-size="12" fill="#8fae5c">⚠ MAX98357A + 2 servos need a</text>
-  <text x="1320" y="780" font-size="12" fill="#8fae5c">separate, strong 5V rail</text>
-  <text x="1320" y="798" font-size="12" fill="#8fae5c">all GND must be common</text>
+  <rect x="1300" y="740" width="260" height="180" rx="10" fill="#1f2a17" stroke="#7fbf3f" stroke-width="2"/>
+  <text x="1320" y="768" font-size="17" font-weight="700" fill="#d9f2b8">Power</text>
+  <text x="1320" y="790" font-size="13" fill="#bde08a">Li-ion/LiPo 3.7V ~2000mAh</text>
+  <text x="1320" y="810" font-size="13" fill="#bde08a">TP4056 (charge + 5V boost)</text>
+  <text x="1320" y="830" font-size="13" fill="#bde08a">ON/OFF switch</text>
+  <text x="1320" y="852" font-size="11" fill="#8fae5c">⚠ MAX98357A + 2 wheel servos +</text>
+  <text x="1320" y="870" font-size="11" fill="#8fae5c">arm/neck servos need a separate,</text>
+  <text x="1320" y="888" font-size="11" fill="#8fae5c">strong 5V rail -- all GND common</text>
+  <line x1="1300" y1="830" x2="1480" y2="1020" stroke="#7fbf3f" stroke-width="1.5" stroke-dasharray="4,3"/>
 
-  <!-- connecting lines: left group to MCU -->
-  <line x1="300" y1="150" x2="660" y2="430" stroke="#3fbf7f" stroke-width="2"/>
-  <line x1="300" y1="300" x2="660" y2="470" stroke="#4a8fe0" stroke-width="2"/>
-  <line x1="300" y1="445" x2="660" y2="500" stroke="#e0b24a" stroke-width="2"/>
-  <line x1="300" y1="585" x2="660" y2="540" stroke="#4a8fe0" stroke-width="2"/>
-  <line x1="300" y1="745" x2="660" y2="600" stroke="#777" stroke-width="2" stroke-dasharray="6,5"/>
-
-  <!-- connecting lines: MCU to right group -->
-  <line x1="940" y1="420" x2="1300" y2="175" stroke="#a06ee0" stroke-width="2"/>
-  <line x1="940" y1="450" x2="1300" y2="325" stroke="#e0a04a" stroke-width="2"/>
-  <line x1="940" y1="480" x2="1300" y2="445" stroke="#e0a04a" stroke-width="2"/>
-  <line x1="940" y1="560" x2="1300" y2="575" stroke="#e04a9c" stroke-width="2"/>
-  <line x1="940" y1="640" x2="1300" y2="735" stroke="#7fbf3f" stroke-width="2"/>
-
-  <text x="40" y="900" font-size="13" fill="#5b7d8f">⚠ = flagged in README as unconfirmed or unverified. Dashed box = optional / not used in the default build.</text>
-  <text x="40" y="924" font-size="13" fill="#5b7d8f">GPIO layout credit: KST AI Robot public wiring diagram (ai.kenhsangtao.com) — pin numbers only, no code or artwork copied.</text>
-  <text x="40" y="948" font-size="13" fill="#5b7d8f">Do not use GPIO36/GPIO37 (reserved for PSRAM on ESP32-S3-WROOM-1 N16R8).</text>
+  <text x="40" y="960" font-size="13" fill="#5b7d8f">⚠ = flagged in README as unconfirmed or unverified. Dashed box/line = optional, unused by default, or a shared 3V3/GND rail connection.</text>
+  <text x="40" y="984" font-size="13" fill="#5b7d8f">GPIO layout credit: KST AI Robot public wiring diagram (ai.kenhsangtao.com) — pin numbers only, no code or artwork copied.</text>
+  <text x="40" y="1008" font-size="13" fill="#5b7d8f">Do not use GPIO36/GPIO37 (reserved for PSRAM on ESP32-S3-WROOM-1 N16R8).</text>
 </svg>
