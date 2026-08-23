@@ -109,15 +109,83 @@ module upright_servo_pocket() {
     pocket(pose_servo_l, pose_servo_w, 10);
 }
 
+// --------------------------------------------------------------------------
+// Servo-horn paddles (arm + neck)
+// --------------------------------------------------------------------------
+// Neither servo previously had anything modeled past the cradle/pocket that
+// holds its body -- nothing represented the actual limb that attaches to the
+// output horn, so there was no real arm or neck, just a place to park the
+// servo. These paddles screw onto the servo's own stock single-arm horn
+// (2 holes matching a standard SG90-class horn's screw spacing) the same way
+// KST's own arm looks to be built in the reference photos: a flat paddle on
+// the stock horn, not a custom spline adapter. Shape/size are Yana's own,
+// not measured from or copied off their part.
+horn_hole_d = 2.2;       // clears an M2 self-tap screw into the horn's own holes
+horn_hole_spacing = 8;   // typical SG90 single-arm horn screw spacing
+
+module horn_paddle(length, width, thickness = 3) {
+    difference() {
+        hull() {
+            translate([-length / 2 + width / 2, 0, 0])
+                cylinder(h = thickness, d = width, center = true, $fn = 32);
+            translate([length / 2 - width / 2, 0, 0])
+                cylinder(h = thickness, d = width, center = true, $fn = 32);
+        }
+        for (side = [-1, 1])
+            translate([-length / 2 + width / 2, side * horn_hole_spacing / 2, 0])
+                cylinder(h = thickness + 2, d = horn_hole_d, center = true, $fn = 16);
+    }
+}
+
+// Arm paddle: mounts on the arm servo's horn at the cradle's +Y (output) end
+// and reaches outward past the deck edge. 45mm long is a starting length --
+// re-check against the real servo horn and the printed cradle before final.
+module arm_horn_paddle() {
+    horn_y = arm_y + (drive_axis_l + 3) / 2;
+    horn_z = deck_t / 2 + 1.3 - z_fuse + drive_h / 2;
+    translate([arm_x, horn_y, horn_z])
+        rotate([90, 0, 90])
+            horn_paddle(45, 12);
+}
+
+// Neck bracket: sits on the neck servo's horn at the top of the upright
+// pocket -- a small flat platform for the head/face plate to eventually
+// screw onto, not the face plate itself (that's a separate, later piece).
+module neck_horn_bracket() {
+    horn_z = deck_t / 2 + 5 - z_fuse + pose_servo_h;
+    translate([neck_x, neck_y, horn_z])
+        horn_paddle(30, 14);
+}
+
 // TFT landscape bezel. It holds the full 57x35 PCB envelope from the rear;
 // the conservative window avoids assuming exact mounting-hole locations.
+// Own silhouette (rounded corners instead of a sharp rectangle) and an
+// embossed "YANA" wordmark -- sized to Yana's own display envelope, not
+// measured or traced from any third-party reference file.
+bezel_corner_r = 8;
+
 module tft_bezel() {
     bezel_y = tft_l + 2 * wall_t;
     bezel_z = tft_w + 2 * wall_t;
     difference() {
-        cube([wall_t, bezel_y, bezel_z], center = true);
+        hull()
+            for (y = [-1, 1])
+                for (z = [-1, 1])
+                    translate([0, y * (bezel_y / 2 - bezel_corner_r),
+                               z * (bezel_z / 2 - bezel_corner_r)])
+                        rotate([0, 90, 0])
+                            cylinder(h = wall_t, d = 2 * bezel_corner_r,
+                                     center = true, $fn = 32);
         cube([wall_t + 2, tft_l - 8, tft_w - 8], center = true);
     }
+
+    // Embossed wordmark, bottom-right corner of the front face, clear of
+    // the window and the corner radius.
+    translate([wall_t / 2 - 0.6, bezel_y / 2 - 15, -bezel_z / 2 + 6])
+        rotate([90, 0, 90])
+            linear_extrude(height = 0.6)
+                text("YANA", size = 5, halign = "center", valign = "center",
+                     font = "Liberation Sans:style=Bold");
 
     // Rear retaining rails: bottom and two sides, open at top for insertion.
     translate([-tft_h / 2, 0, -bezel_z / 2 + wall_t / 2])
@@ -211,6 +279,11 @@ module chassis_v2() {
             translate([neck_x, neck_y,
                        deck_t / 2 + 5 - z_fuse])
                 upright_servo_pocket();
+
+            // Arm and neck horn paddles -- the actual limb attachment points,
+            // previously missing entirely (see "Servo-horn paddles" above).
+            arm_horn_paddle();
+            neck_horn_bracket();
 
             // Landscape TFT at the front edge.
             bezel_z = tft_w + 2 * wall_t;

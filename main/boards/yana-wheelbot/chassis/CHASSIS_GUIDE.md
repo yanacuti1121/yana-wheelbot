@@ -8,7 +8,8 @@ This document covers the chassis:
   file to load into your slicer.
 - [`yana_wheelbot_chassis_v2.scad`](yana_wheelbot_chassis_v2.scad): the
   OpenSCAD source for adjusting dimensions.
-- Current exported STL size: **210 x 122 x 43.85 mm**.
+- Current exported STL size: **210 x 142 x 43.85 mm** (the extra width past
+  the 122mm deck comes from the arm horn paddle described below).
 
 The chassis is a functional integration deck with mounts for the ESP32-S3,
 display, audio, sensors, four servos, battery, and two power boards. It is
@@ -18,6 +19,16 @@ not yet a cosmetic Wall-E-style outer shell.
 > dimensions can differ from the listing photos. Before the final print,
 > measure the real components with calipers and adjust the variables at the
 > top of the `.scad` file if the mismatch is more than about 0.5 mm.
+
+> **New — arm/neck horn paddles, hole spacing NOT yet verified.** The STL
+> now includes two small separate pieces — a paddle for the arm servo and a
+> bracket for the neck servo — that screw onto each servo's own stock horn
+> (2 holes, 8mm apart, sized for an M2 self-tap screw). That 8mm spacing is
+> a typical SG90-class figure, **not measured from the actual horn you'll
+> use**. Different horn brands vary by a few mm. Hold the real horn up to
+> the printed paddle before committing glue or a permanent screw — if the
+> holes are off, adjust `horn_hole_spacing` in the `.scad` file and
+> re-export before printing again.
 
 ## 1. Choosing a print material
 

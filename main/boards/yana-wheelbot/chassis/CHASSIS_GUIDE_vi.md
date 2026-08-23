@@ -8,7 +8,8 @@ Tài liệu này dành cho chassis:
   đem vào slicer để in.
 - [`yana_wheelbot_chassis_v2.scad`](yana_wheelbot_chassis_v2.scad): nguồn
   OpenSCAD để chỉnh kích thước.
-- Kích thước xuất STL hiện tại: **210 x 122 x 43,85 mm**.
+- Kích thước xuất STL hiện tại: **210 x 142 x 43,85 mm** (phần rộng thêm so
+  với deck 122mm là do miếng paddle gắn tay servo, xem ghi chú bên dưới).
 
 Chassis là bản tích hợp chức năng, có vị trí cho ESP32-S3, màn hình, âm thanh,
 cảm biến, bốn servo, pin và hai mạch nguồn. Đây chưa phải vỏ Wall-E trang trí.
@@ -16,6 +17,15 @@ cảm biến, bốn servo, pin và hai mạch nguồn. Đây chưa phải vỏ W
 > **Quan trọng:** kích thước PCB clone, pin, loa, switch và tai servo có thể
 > khác listing. Trước khi in bản cuối, đo linh kiện thật bằng thước kẹp và sửa
 > các biến ở đầu file `.scad` nếu sai lệch quá khoảng 0,5 mm.
+
+> **Mới — miếng ghép nối tay/cổ vào servo horn, khoảng cách lỗ CHƯA được đo
+> thật.** File STL giờ có thêm 2 chi tiết in rời — 1 paddle cho servo tay, 1
+> bracket cho servo cổ — vít vào đúng horn nhựa có sẵn của servo (2 lỗ, cách
+> nhau 8mm, vừa vít tự ren M2). Con số 8mm này là **số điển hình của horn
+> loại SG90, chưa đo trên đúng horn anh sẽ dùng** — mỗi hãng horn có thể
+> lệch vài mm. Trước khi dán keo hoặc vít cố định, ướm thử horn thật lên
+> miếng paddle đã in — nếu lệch, sửa biến `horn_hole_spacing` trong file
+> `.scad` rồi export lại trước khi in tiếp.
 
 ## 1. Chọn vật liệu in
 
