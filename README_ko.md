@@ -96,10 +96,10 @@ XiaoZhi 프로젝트의 원본 저작권 표시를 보존하고 있습니다.
 
 ## Star History
 
-<a href="https://star-history.com/#yanacuti1121/yana-robot&Date">
+<a href="https://star-history.com/#yanacuti1121/yana-wheelbot&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=yanacuti1121/yana-robot&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=yanacuti1121/yana-robot&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=yanacuti1121/yana-robot&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=yanacuti1121/yana-wheelbot&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=yanacuti1121/yana-wheelbot&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=yanacuti1121/yana-wheelbot&type=Date" />
  </picture>
 </a>
