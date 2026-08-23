@@ -8,6 +8,7 @@ ESP32-S3 음성 AI 로보틱스 플랫폼 — 모터/서보 제어, 낙하 방�
 
 ## Yana Wheelbot
 
+<img src="main/boards/yana-wheelbot/chassis/chassis-render.png" alt="Yana Wheelbot 섀시, OpenSCAD 렌더" width="480">
 <img src="main/boards/yana-wheelbot/wiring-diagram.svg" alt="Yana Wheelbot 배선도" width="480">
 
 - 차동 구동 이동, 런타임에 선택 가능한 모터 드라이버(연속 회전 서보 또는

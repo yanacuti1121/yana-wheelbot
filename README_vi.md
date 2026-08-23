@@ -8,6 +8,7 @@ riêng của Yana từ nền firmware XiaoZhi AI Chatbot.
 
 ## Yana Wheelbot
 
+<img src="main/boards/yana-wheelbot/chassis/chassis-render.png" alt="Chassis Yana Wheelbot, render từ OpenSCAD" width="480">
 <img src="main/boards/yana-wheelbot/wiring-diagram.svg" alt="Sơ đồ đấu nối Yana Wheelbot" width="480">
 
 - Di chuyển differential-drive, driver động cơ chọn được lúc chạy (servo

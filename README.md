@@ -8,6 +8,7 @@ XiaoZhi AI Chatbot firmware base.
 
 ## Yana Wheelbot
 
+<img src="main/boards/yana-wheelbot/chassis/chassis-render.png" alt="Yana Wheelbot chassis, OpenSCAD render" width="480">
 <img src="main/boards/yana-wheelbot/wiring-diagram.svg" alt="Yana Wheelbot wiring diagram" width="480">
 
 - Differential-drive movement, motor backend selectable at runtime
