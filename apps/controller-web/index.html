@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yana Wheelbot Controller</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">YA</span>
+        <h1>Yana Wheelbot</h1>
+      </div>
+      <div class="connect-bar">
+        <input id="device-url" type="text" data-i18n-placeholder="deviceUrlPlaceholder" />
+        <input id="device-token" type="text" data-i18n-placeholder="tokenPlaceholder" size="10" />
+        <button id="connect-btn" data-i18n="connect">Connect</button>
+        <select id="lang-select" aria-label="Language">
+          <option value="en">English</option>
+          <option value="vi">Tiếng Việt</option>
+          <option value="ko">한국어</option>
+        </select>
+      </div>
+      <div class="status-bar" aria-live="polite">
+        <span id="status" class="status-pill disconnected" data-i18n="statusDisconnected">● Disconnected</span>
+        <span id="status-cliff" class="status-pill status-pill-quiet" data-i18n="antiFallDash">Anti-fall —</span>
+        <span id="status-motion" class="status-pill status-pill-quiet" data-i18n="motorsDash">Motors —</span>
+      </div>
+    </header>
+
+    <main class="dashboard">
+      <section class="panel panel-movement">
+        <h2 data-i18n="movementTitle">Movement</h2>
+        <div class="row">
+          <label><span data-i18n="safetyPulse">Safety pulse (ms)</span> <input id="duration-ms" type="number" value="750" min="250" max="2000" /></label>
+          <label><span data-i18n="speed">Speed</span> <input id="speed" type="number" value="80" min="0" max="100" /></label>
+        </div>
+        <p class="control-help" data-i18n="movementHelp">Hold a direction to move; release to stop. Keyboard: WASD or arrow keys.</p>
+        <div class="dpad" aria-label="Dead-man movement controls">
+          <button id="btn-forward" class="dpad-up" aria-label="Move forward">▲</button>
+          <div class="dpad-middle">
+            <button id="btn-left" class="dpad-left" aria-label="Turn left">◀</button>
+            <button id="btn-stop" class="dpad-stop" aria-label="Emergency stop">STOP</button>
+            <button id="btn-right" class="dpad-right" aria-label="Turn right">▶</button>
+          </div>
+          <button id="btn-backward" class="dpad-down" aria-label="Move backward">▼</button>
+        </div>
+        <div class="control-state" aria-live="polite">
+          <span id="drive-status" data-i18n="stopped">Stopped</span>
+          <span id="gamepad-status" data-i18n="noGamepad">No gamepad</span>
+        </div>
+      </section>
+
+      <section class="panel panel-armneck">
+        <h2 data-i18n="armNeckTitle">Arm &amp; Neck</h2>
+        <div class="slider-row">
+          <label for="arm-angle" data-i18n="arm">Arm</label>
+          <input id="arm-angle" type="range" min="0" max="180" value="90" />
+          <output id="arm-angle-value" for="arm-angle">90°</output>
+        </div>
+        <div class="row">
+          <button id="arm-wave" data-i18n="wave">Wave</button>
+          <button id="arm-release" data-i18n="releaseArm">Release arm</button>
+        </div>
+        <div class="slider-row">
+          <label for="neck-angle" data-i18n="neck">Neck</label>
+          <input id="neck-angle" type="range" min="0" max="180" value="90" />
+          <output id="neck-angle-value" for="neck-angle">90°</output>
+        </div>
+        <div class="row">
+          <button id="neck-left" data-i18n="turnLeft">Turn left</button>
+          <button id="neck-center" data-i18n="center">Center</button>
+          <button id="neck-right" data-i18n="turnRight">Turn right</button>
+          <button id="neck-release" data-i18n="releaseNeck">Release neck</button>
+        </div>
+      </section>
+
+      <section class="panel panel-status">
+        <h2 data-i18n="antiFallTitle">Anti-fall sensor</h2>
+        <dl class="status-grid">
+          <dt data-i18n="state">State</dt>
+          <dd><span id="cliff-state" class="badge badge-quiet">—</span></dd>
+          <dt data-i18n="distance">Distance</dt>
+          <dd id="tof-distance">— mm</dd>
+          <dt data-i18n="lastCommandFrom">Last command from</dt>
+          <dd id="control-source">—</dd>
+        </dl>
+        <div class="row">
+          <label><input id="cliff-enabled" type="checkbox" checked /> <span data-i18n="enabled">Enabled</span></label>
+          <label><span data-i18n="thresholdMm">Threshold (mm)</span> <input id="cliff-threshold" type="number" value="50" min="5" max="500" /></label>
+          <button id="cliff-apply" data-i18n="save">Save</button>
+        </div>
+        <button id="cliff-test" data-i18n="testNow">Test now</button>
+      </section>
+
+      <section class="panel panel-quick">
+        <h2 data-i18n="ledsTitle">LEDs</h2>
+        <div class="row">
+          <button data-mode="follow_state" data-i18n="followState">Follow state</button>
+          <button data-mode="both_on" data-i18n="bothOn">Both on</button>
+          <button data-mode="both_off" data-i18n="bothOff">Both off</button>
+          <button data-mode="left_only" data-i18n="leftOnly">Left only</button>
+          <button data-mode="right_only" data-i18n="rightOnly">Right only</button>
+        </div>
+      </section>
+
+      <details class="panel panel-advanced">
+        <summary data-i18n="advancedTitle">⚙ Hardware / Advanced</summary>
+
+        <h3 data-i18n="motorBackendTitle">Motor backend</h3>
+        <div class="row">
+          <label><span data-i18n="type">Type</span>
+            <select id="motor-type">
+              <option value="servo" data-i18n="continuousServo">Continuous servo</option>
+              <option value="l298n" data-i18n="l298n">L298N DC motor</option>
+            </select>
+          </label>
+          <button id="motor-type-apply" data-i18n="applyReboots">Apply (reboots)</button>
+        </div>
+        <fieldset>
+          <legend data-i18n="l298nPins">L298N pins</legend>
+          <div class="row">
+            <label>IN1 <input id="pin-in1" type="number" value="38" /></label>
+            <label>IN2 <input id="pin-in2" type="number" value="39" /></label>
+            <label>IN3 <input id="pin-in3" type="number" value="40" /></label>
+            <label>IN4 <input id="pin-in4" type="number" value="41" /></label>
+            <button id="pins-apply" data-i18n="applyReboots">Apply (reboots)</button>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend data-i18n="servoCalibration">Servo calibration (live-apply)</legend>
+          <div class="row">
+            <label><span data-i18n="stopPulseUs">Stop pulse (us)</span> <input id="stop-pulse" type="number" value="1500" min="1000" max="2000" /></label>
+            <button id="stop-pulse-apply" data-i18n="set">Set</button>
+          </div>
+          <div class="row">
+            <label><input id="rev-left" type="checkbox" /> <span data-i18n="reverseLeft">Reverse left</span></label>
+            <label><input id="rev-right" type="checkbox" /> <span data-i18n="reverseRight">Reverse right</span></label>
+          </div>
+        </fieldset>
+        <button id="refresh-motor-config" data-i18n="refreshConfig">Refresh config</button>
+        <pre id="motor-config-out" class="output"></pre>
+
+        <h3 data-i18n="displayTitle">Display</h3>
+        <div class="row">
+          <label><span data-i18n="theme">Theme</span>
+            <select id="theme">
+              <option value="light" data-i18n="themeLight">Light</option>
+              <option value="dark" data-i18n="themeDark">Dark</option>
+              <option value="ocean" data-i18n="themeOcean">Ocean</option>
+            </select>
+          </label>
+          <button id="theme-apply" data-i18n="apply">Apply</button>
+        </div>
+        <div class="row">
+          <label><span data-i18n="orientation">Orientation</span>
+            <select id="orientation">
+              <option value="portrait" data-i18n="orientationPortrait">Portrait (128x160)</option>
+              <option value="landscape" data-i18n="orientationLandscape">Landscape</option>
+            </select>
+          </label>
+          <button id="orientation-apply" data-i18n="applyReboots">Apply (reboots)</button>
+        </div>
+      </details>
+    </main>
+
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>

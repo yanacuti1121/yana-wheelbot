@@ -1,0 +1,12 @@
+{
+    "type": "yana-wheelbot",
+    "target": "esp32s3",
+    "builds": [
+        {
+            "name": "yana-wheelbot",
+            "sdkconfig_append": [
+                "CONFIG_HTTPD_WS_SUPPORT=y"
+            ]
+        }
+    ]
+}
