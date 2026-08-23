@@ -20,6 +20,7 @@ main/mmap_generate_emoji.h
 *.bin
 mmap_generate_*.h
 *.stl
+!main/boards/yana-wheelbot/chassis/yana-wheelbot-chassis-final.stl
 main/boards/yana-wheelbot/chassis/preview*.png
 .clangd
 
