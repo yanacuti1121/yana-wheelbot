@@ -16,6 +16,7 @@ Yana Robot / XiaoZhi 플랫폼 기반의 2륜 로봇(차동 구동) 보드입니
 | | *또는* L298N + DC 모터 2개 | IN1-4 핀 규약 관련 주의사항은 "실제 하드웨어 미검증" 항목 참고 |
 | 낙하 방지 센서 (ToF, I2C) | VL53L0X (기본값, 약 2m 범위) | |
 | | *또는* VL6180X / TOF050C (빌드 옵션, 약 200mm 범위) | "빌드 시 변형 선택" 참고 |
+| | *또는* HC-SR04 / US-100 초음파 (빌드 옵션) | 더 저렴하고 구하기 쉬움; 빔 각도가 넓고 값이 더 불안정함 |
 | LED | 단색 LED 2개 (좌/우) | |
 | 팔 + 목 서보 | 표준 각도 서보 2개 (0-180°) | |
 | 터치 센서 | TTP223 정전식 터치 모듈 | 두 번 터치하면 채팅 켜기/끄기, 부팅 버튼과 동일 |
@@ -52,6 +53,8 @@ Yana Robot / XiaoZhi 플랫폼 기반의 2륜 로봇(차동 구동) 보드입니
 | | 우 | 45 | |
 | ToF 센서 (I2C) | SDA | 1 | |
 | | SCL | 2 | |
+| 낙하 방지 센서, HC-SR04/US-100 대체 옵션 | TRIG | 8 | `CONFIG_YANA_WHEELBOT_TOF_HCSR04` 활성화 시에만 배선 |
+| | ECHO | 19 | |
 | LED | 좌 | 3 | |
 | | 우 | 18 | |
 | 팔 서보 | 신호 | 20 | |
@@ -86,9 +89,15 @@ PSRAM 전용으로 예약되어 있습니다.
 ```
 CONFIG_YANA_WHEELBOT_DISPLAY_ST7735=y   # ST7789 대신 ST7735 드라이버 사용
 CONFIG_YANA_WHEELBOT_TOF_VL6180X=y      # VL53L0X 대신 VL6180X 센서 사용
+CONFIG_YANA_WHEELBOT_TOF_HCSR04=y       # 위 두 I2C ToF 센서 대신 HC-SR04/US-100 사용
 ```
 
 옵션 변경 후에는 `idf.py fullclean` 실행 후 다시 빌드하세요.
+
+**중요:** 이 단계는 반드시 `idf.py build`로 직접 빌드해야 합니다 —
+`python3 scripts/build.py`는 사용하지 마세요. 이 스크립트는 실행할 때마다
+보드 기본 Kconfig를 다시 불러와서, 방금 활성화한 세 옵션 중 무엇이든
+조용히 덮어씁니다.
 
 ## 제어 프로토콜
 

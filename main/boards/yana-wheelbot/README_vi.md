@@ -16,6 +16,7 @@ phần voice AI + màn hình biểu cảm có sẵn của nền tảng.
 | | *hoặc* L298N + 2 động cơ DC | Xem lưu ý về quy ước chân IN1-4 ở phần "Chưa xác minh" |
 | Cảm biến chống rơi (ToF, I2C) | VL53L0X (mặc định, tầm ~2m) | |
 | | *hoặc* VL6180X / TOF050C (build option, tầm ~200mm) | Xem "Chọn biến thể lúc build" |
+| | *hoặc* HC-SR04 / US-100 siêu âm (build option) | Rẻ hơn, dễ mua hơn; góc quét rộng hơn, tín hiệu nhiễu hơn |
 | LED | 2x LED đơn (trái/phải) | |
 | Servo tay + cổ | 2x servo góc thường (0-180°) | |
 | Cảm biến chạm | Module cảm ứng chạm TTP223 | Chạm đôi để bật/tắt trò chuyện, giống nút boot |
@@ -53,6 +54,8 @@ nằm ở `config.h`.
 | | Phải | 45 | |
 | Cảm biến ToF (I2C) | SDA | 1 | |
 | | SCL | 2 | |
+| Cảm biến chống rơi, HC-SR04/US-100 thay thế | TRIG | 8 | Chỉ đấu dây khi bật `CONFIG_YANA_WHEELBOT_TOF_HCSR04` |
+| | ECHO | 19 | |
 | LED | Trái | 3 | |
 | | Phải | 18 | |
 | Servo tay | Tín hiệu | 20 | |
@@ -87,9 +90,15 @@ VL6180X, bật 2 tùy chọn Kconfig sau trước khi build (`idf.py menuconfig`
 ```
 CONFIG_YANA_WHEELBOT_DISPLAY_ST7735=y   # dùng driver ST7735 thay vì ST7789
 CONFIG_YANA_WHEELBOT_TOF_VL6180X=y      # dùng cảm biến VL6180X thay vì VL53L0X
+CONFIG_YANA_WHEELBOT_TOF_HCSR04=y       # dùng HC-SR04/US-100 thay vì 2 cảm biến ToF I2C trên
 ```
 
 Sau khi đổi, chạy `idf.py fullclean` rồi build lại.
+
+**Quan trọng:** phải build bằng `idf.py build` trực tiếp cho bước này,
+không dùng `python3 scripts/build.py` — script đó tự nạp lại cấu hình mặc
+định của board mỗi lần chạy, sẽ âm thầm xóa mất bất kỳ tùy chọn nào trong 3
+tùy chọn trên anh vừa bật.
 
 ## Giao thức điều khiển
 
