@@ -17,6 +17,7 @@ voice AI and animated-face display.
 | | *or* L298N + 2x DC motor | See the IN1-4 pin-convention caveat in "Not yet verified on real hardware" |
 | Anti-fall sensor (ToF, I2C) | VL53L0X (default, ~2m range) | |
 | | *or* VL6180X / TOF050C (build option, ~200mm range) | See "Build-time variant selection" |
+| | *or* HC-SR04 / US-100 ultrasonic (build option) | Cheaper, more widely available; wider beam angle, noisier reading |
 | LEDs | 2x single LED (left/right) | |
 | Arm + neck servos | 2x standard angle servo (0-180°) | |
 | Touch sensor | TTP223 capacitive touch module | Double-tap toggles chat, same as the boot button |
@@ -54,6 +55,8 @@ All definitions live in `config.h`.
 | | Right | 45 | |
 | ToF sensor (I2C) | SDA | 1 | |
 | | SCL | 2 | |
+| Anti-fall sensor, HC-SR04/US-100 alternative | TRIG | 8 | Only wired up if `CONFIG_YANA_WHEELBOT_TOF_HCSR04` is enabled |
+| | ECHO | 19 | |
 | LED | Left | 3 | |
 | | Right | 18 | |
 | Arm servo | Signal | 20 | |
@@ -88,9 +91,15 @@ menuconfig` → "Yana Wheelbot", or edit `sdkconfig` directly):
 ```
 CONFIG_YANA_WHEELBOT_DISPLAY_ST7735=y   # use the ST7735 driver instead of ST7789
 CONFIG_YANA_WHEELBOT_TOF_VL6180X=y      # use the VL6180X sensor instead of VL53L0X
+CONFIG_YANA_WHEELBOT_TOF_HCSR04=y       # use HC-SR04/US-100 instead of either I2C ToF sensor
 ```
 
-Run `idf.py fullclean` and rebuild after changing either option.
+Run `idf.py fullclean` and rebuild after changing any of these options.
+
+**Important:** build with `idf.py build` directly for this, not
+`python3 scripts/build.py` — that script reloads the board's default
+Kconfig on every run and will silently discard whichever of the three
+options above you just enabled.
 
 ## Control protocol
 
