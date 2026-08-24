@@ -31,9 +31,16 @@ struct HardwareConfig {
     gpio_num_t servo_left_pin;   // continuous-rotation servo, left wheel
     gpio_num_t servo_right_pin;  // continuous-rotation servo, right wheel
 
-    // ToF anti-fall sensor (VL53L0X, I2C)
+    // ToF anti-fall sensor (VL53L0X/VL6180X, I2C)
     gpio_num_t tof_i2c_sda_pin;
     gpio_num_t tof_i2c_scl_pin;
+
+    // Anti-fall sensor alternative: HC-SR04/US-100 ultrasonic (GPIO
+    // trigger/echo timing, no I2C bus). Only used when
+    // CONFIG_YANA_WHEELBOT_TOF_HCSR04 is enabled -- otherwise unused, and
+    // these two pins stay free for anything else.
+    gpio_num_t tof_trig_pin;
+    gpio_num_t tof_echo_pin;
 
     // LEDs
     gpio_num_t led_left_pin;
@@ -79,6 +86,12 @@ constexpr HardwareConfig WHEELBOT_HARDWARE_CONFIG = {
     // Matches KST wiring diagram exactly (I2C for VL6180X/TOF050C on their board).
     .tof_i2c_sda_pin = GPIO_NUM_1,
     .tof_i2c_scl_pin = GPIO_NUM_2,
+
+    // HC-SR04/US-100 alternative (only wired up if selected in Kconfig).
+    // GPIO8/19 aren't used by anything else in this board's pin map --
+    // verify against your actual wiring before relying on them.
+    .tof_trig_pin = GPIO_NUM_8,
+    .tof_echo_pin = GPIO_NUM_19,
 
     // Matches KST wiring diagram exactly.
     .led_left_pin = GPIO_NUM_3,

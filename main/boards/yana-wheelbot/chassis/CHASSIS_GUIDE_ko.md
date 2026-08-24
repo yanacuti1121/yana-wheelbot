@@ -106,6 +106,7 @@ KST의 판매 링크를 그대로 가져온 것이 아닙니다. 리스팅은 �
 | 4 | MAX98357A | 1 | I2S Class-D 모노, 약 3 W | 5 V 레일 | LRC 15, BCLK 16, DIN 17 | 약 19 x 18 mm | [Coupang](https://www.coupang.com/vp/products/9649666019) |
 | 5 | 스피커 | 1 | 3 W, 4 ohm | MAX98357A | — | 실제 스피커 실측 필요; CAD는 현재 약 Ø42 mm로 확보 | [Coupang](https://www.coupang.com/vp/products/9687303942?itemId=28970688668&vendorItemId=95932788332) |
 | 6 | VL6180X | 1 | ToF, I2C | 3V3 | SDA 1, SCL 2 | PCB 약 18–25 mm | [Coupang](https://www.coupang.com/vp/products/7206616775?itemId=18226765538&vendorItemId=85374303210) |
+| 6b | HC-SR04 / US-100 (대체용) | 1 | 초음파 거리 센서, US-100은 점퍼 모드 | 5V | TRIG 8, ECHO 19 | 약 45 x 20 mm, 모듈마다 다름 | [Coupang](https://www.coupang.com/vp/products/8285789889?itemId=24052894703&vendorItemId=91072872377) |
 | 7 | TTP223 | 1 | 정전용량 터치 | 3V3 | OUT 7 | 약 14 x 11 mm | [Coupang](https://www.coupang.com/vp/products/9337846580?itemId=27690418458&vendorItemId=94652272760) |
 | 8 | 360° 서보 | 2 | **연속 회전(continuous-rotation)** 마이크로 서보 | 5 V 서보 레일 | 왼쪽 47, 오른쪽 45 | SG90급, 약 23 x 12 x 29 mm | 아직 확정된 링크 없음; 180° 버전을 잘못 사지 않도록 주의 |
 | 9 | 180° 서보 | 2 | 팔·목용 위치제어 마이크로 서보 | 5 V 서보 레일 | 팔 20, 목 21 | 약 23 x 12 x 29 mm | [Coupang](https://www.coupang.com/vp/products/190778115?itemId=9577817213&vendorItemId=76862407783) |
@@ -390,6 +391,16 @@ menuconfig`의 **Yana Wheelbot** 항목에서 아래 두 옵션을 켠 뒤 다�
 CONFIG_YANA_WHEELBOT_DISPLAY_ST7735=y
 CONFIG_YANA_WHEELBOT_TOF_VL6180X=y
 ```
+
+VL6180X 대신 HC-SR04/US-100(BOM 6b번)을 사용한다면
+`CONFIG_YANA_WHEELBOT_TOF_VL6180X` 대신 `CONFIG_YANA_WHEELBOT_TOF_HCSR04=y`를
+켜세요 — 기본 TRIG/ECHO 핀은 GPIO8/GPIO19이며, 배선이 다르면 `config.h`에서
+수정하세요.
+
+> **주의:** 위 디스플레이/ToF Kconfig 옵션을 바꿀 때는 반드시 `idf.py
+> build`로 직접 빌드해야 합니다 — 이 단계에서는 `python3 scripts/build.py`를
+> **사용하지 마세요**. 이 스크립트는 실행할 때마다 보드 기본 설정을 다시
+> 불러와서, 방금 켠 ST7735/VL6180X/HC-SR04 옵션을 조용히 덮어씁니다.
 
 설정을 바꾼 뒤:
 

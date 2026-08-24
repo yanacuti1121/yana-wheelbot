@@ -96,6 +96,7 @@ kiểm tra đúng thông số trước khi đặt hàng.
 | 4 | MAX98357A | 1 | I2S Class-D mono, khoảng 3 W | 5 V rail | LRC 15, BCLK 16, DIN 17 | khoảng 19 x 18 mm | [Coupang](https://www.coupang.com/vp/products/9649666019) |
 | 5 | Loa | 1 | 3 W, 4 ohm | MAX98357A | — | đo đúng loa thực tế; CAD hiện chừa khoảng Ø42 mm | [Coupang](https://www.coupang.com/vp/products/9687303942?itemId=28970688668&vendorItemId=95932788332) |
 | 6 | VL6180X | 1 | ToF I2C | 3V3 | SDA 1, SCL 2 | PCB khoảng 18–25 mm | [Coupang](https://www.coupang.com/vp/products/7206616775?itemId=18226765538&vendorItemId=85374303210) |
+| 6b | HC-SR04 / US-100 (thay thế) | 1 | Cảm biến khoảng cách siêu âm, chế độ jumper nếu là US-100 | 5V | TRIG 8, ECHO 19 | ~45 x 20 mm, tùy module | [Coupang](https://www.coupang.com/vp/products/8285789889?itemId=24052894703&vendorItemId=91072872377) |
 | 7 | TTP223 | 1 | Cảm ứng điện dung | 3V3 | OUT 7 | khoảng 14 x 11 mm | [Coupang](https://www.coupang.com/vp/products/9337846580?itemId=27690418458&vendorItemId=94652272760) |
 | 8 | Servo 360° | 2 | Micro servo **continuous rotation** | 5 V servo rail | trái 47, phải 45 | SG90-class khoảng 23 x 12 x 29 mm | Chưa chốt URL; không mua nhầm bản 180° |
 | 9 | Servo 180° | 2 | Micro servo positional cho tay và cổ | 5 V servo rail | tay 20, cổ 21 | khoảng 23 x 12 x 29 mm | [Coupang](https://www.coupang.com/vp/products/190778115?itemId=9577817213&vendorItemId=76862407783) |
@@ -354,6 +355,16 @@ Phần cứng trong tài liệu này dùng ST7735 và VL6180X. Bật hai lựa c
 CONFIG_YANA_WHEELBOT_DISPLAY_ST7735=y
 CONFIG_YANA_WHEELBOT_TOF_VL6180X=y
 ```
+
+Nếu dùng HC-SR04/US-100 (mục 6b trong BOM) thay cho VL6180X, bật
+`CONFIG_YANA_WHEELBOT_TOF_HCSR04=y` thay vì `CONFIG_YANA_WHEELBOT_TOF_VL6180X`
+— hai chân TRIG/ECHO mặc định là GPIO8/GPIO19, chỉnh trong `config.h` nếu đấu
+khác.
+
+> **Lưu ý:** đổi Kconfig cho display/ToF sensor (như ở trên) bắt buộc build
+> bằng `idf.py build` trực tiếp, **không dùng** `python3 scripts/build.py`
+> cho bước này — script đó tự nạp lại cấu hình mặc định của board mỗi lần
+> chạy, sẽ ghi đè mất lựa chọn ST7735/VL6180X/HC-SR04 anh vừa bật.
 
 Sau khi thay cấu hình:
 

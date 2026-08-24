@@ -21,6 +21,7 @@
 #include "mcp_server.h"
 #include "settings.h"
 #include "tof_sensor.h"
+#include "hc_sr04.h"
 #include "vl53l0x.h"
 #include "vl6180x.h"
 #include "websocket_control_server.h"
@@ -176,6 +177,11 @@ private:
     }
 
     void InitializeTofSensor() {
+#if CONFIG_YANA_WHEELBOT_TOF_HCSR04
+        // Ultrasonic, GPIO trigger/echo timing -- no I2C bus needed at all.
+        tof_sensor_ = new HcSr04(WHEELBOT_HARDWARE_CONFIG.tof_trig_pin,
+                                 WHEELBOT_HARDWARE_CONFIG.tof_echo_pin);
+#else
         i2c_master_bus_config_t i2c_bus_cfg = {
             .i2c_port = I2C_NUM_0,
             .sda_io_num = WHEELBOT_HARDWARE_CONFIG.tof_i2c_sda_pin,
@@ -191,6 +197,7 @@ private:
         tof_sensor_ = new Vl6180x(tof_i2c_bus_, VL6180X_I2C_ADDR);
 #else
         tof_sensor_ = new Vl53l0x(tof_i2c_bus_, VL53L0X_I2C_ADDR);
+#endif
 #endif
     }
 

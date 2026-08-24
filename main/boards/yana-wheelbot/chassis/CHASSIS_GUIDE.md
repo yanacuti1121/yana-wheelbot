@@ -107,6 +107,7 @@ seller, price, or variant; verify the exact spec before ordering.
 | 4 | MAX98357A | 1 | I2S Class-D mono, approx. 3 W | 5 V rail | LRC 15, BCLK 16, DIN 17 | approx. 19 x 18 mm | [Coupang](https://www.coupang.com/vp/products/9649666019) |
 | 5 | Speaker | 1 | 3 W, 4 ohm | MAX98357A | — | measure the real speaker; CAD currently reserves approx. Ø42 mm | [Coupang](https://www.coupang.com/vp/products/9687303942?itemId=28970688668&vendorItemId=95932788332) |
 | 6 | VL6180X | 1 | ToF, I2C | 3V3 | SDA 1, SCL 2 | PCB approx. 18–25 mm | [Coupang](https://www.coupang.com/vp/products/7206616775?itemId=18226765538&vendorItemId=85374303210) |
+| 6b | HC-SR04 / US-100 (alternative) | 1 | Ultrasonic distance sensor, jumper mode if US-100 | 5V | TRIG 8, ECHO 19 | ~45 x 20 mm, varies by module | [Coupang](https://www.coupang.com/vp/products/8285789889?itemId=24052894703&vendorItemId=91072872377) |
 | 7 | TTP223 | 1 | Capacitive touch | 3V3 | OUT 7 | approx. 14 x 11 mm | [Coupang](https://www.coupang.com/vp/products/9337846580?itemId=27690418458&vendorItemId=94652272760) |
 | 8 | 360° servo | 2 | Micro **continuous-rotation** servo | 5 V servo rail | left 47, right 45 | SG90-class, approx. 23 x 12 x 29 mm | Not yet finalized; do not accidentally buy the 180° version |
 | 9 | 180° servo | 2 | Micro positional servo for arm and neck | 5 V servo rail | arm 20, neck 21 | approx. 23 x 12 x 29 mm | [Coupang](https://www.coupang.com/vp/products/190778115?itemId=9577817213&vendorItemId=76862407783) |
@@ -394,6 +395,17 @@ following under **Yana Wheelbot** in `idf.py menuconfig`, then rebuild:
 CONFIG_YANA_WHEELBOT_DISPLAY_ST7735=y
 CONFIG_YANA_WHEELBOT_TOF_VL6180X=y
 ```
+
+Using an HC-SR04/US-100 (BOM item 6b) instead of the VL6180X? Enable
+`CONFIG_YANA_WHEELBOT_TOF_HCSR04=y` instead of
+`CONFIG_YANA_WHEELBOT_TOF_VL6180X` — default TRIG/ECHO pins are GPIO8/GPIO19,
+adjust in `config.h` if wired differently.
+
+> **Note:** changing the display/ToF Kconfig options above requires building
+> with `idf.py build` directly -- **do not use**
+> `python3 scripts/build.py` for this step. That script reloads the board's
+> default configuration on every run, which silently discards whichever
+> ST7735/VL6180X/HC-SR04 options you just enabled.
 
 After changing the configuration:
 

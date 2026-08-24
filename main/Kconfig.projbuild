@@ -616,6 +616,17 @@ choice BOARD_TYPE
             Select if your anti-fall sensor is a VL6180X (shorter range,
             ~200mm max) instead of the default VL53L0X (~2m max). Both are
             I2C; only the driver differs.
+    config YANA_WHEELBOT_TOF_HCSR04
+        bool "Yana Wheelbot: use HC-SR04/US-100 ultrasonic sensor instead of an I2C ToF"
+        depends on BOARD_TYPE_YANA_WHEELBOT
+        default n
+        help
+            Select if your anti-fall sensor is an HC-SR04 or a US-100 in
+            jumper mode (cheaper, more commonly available than VL53L0X/
+            VL6180X, but a wider beam angle and noisier reading). Uses two
+            plain GPIOs (trigger/echo) instead of I2C -- see tof_trig_pin/
+            tof_echo_pin in this board's config.h. Takes priority over
+            YANA_WHEELBOT_TOF_VL6180X if both are somehow enabled at once.
     config BOARD_TYPE_YUNLIAO_S3
         bool "Yunliao S3 (小智云聊)"
         depends on IDF_TARGET_ESP32S3
