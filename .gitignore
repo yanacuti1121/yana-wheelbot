@@ -29,3 +29,8 @@ main/boards/yana-wheelbot/chassis/preview*.png
 .claude/state/
 yana-ai-audit.sarif
 yana-ai-audit-report.md
+
+# Fire-3D-CAD: firmware .bin is allowed on git (exempt from the global *.bin ignore);
+# the .3mf CAD files are copyrighted and must stay local-only
+!Fire-3D-CAD/*.bin
+Fire-3D-CAD/*.3mf
