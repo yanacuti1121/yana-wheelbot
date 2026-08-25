@@ -34,6 +34,79 @@ thật, nhưng chưa có robot thật nào được lắp và chạy thử. Xem 
 của board để biết danh sách cụ thể những gì còn cần kiểm chứng trên phần
 cứng trước khi coi là ổn.
 
+## Điều khiển bằng điện thoại hoặc máy tính
+
+Yana Wheelbot hiện **không** tự cung cấp trang `/robot`. Giao diện trong
+[`apps/controller-web`](apps/controller-web) chạy trên máy Mac, Windows hoặc
+Linux rồi kết nối trực tiếp tới robot qua cùng mạng Wi-Fi nội bộ.
+
+### Chuẩn bị trước khi kết nối
+
+- Nạp firmware `yana-wheelbot` và cho robot kết nối Wi-Fi 2.4 GHz.
+- Máy chạy giao diện và điện thoại, nếu có, phải ở cùng mạng LAN. Không dùng
+  mạng khách và phải tắt tính năng AP/client isolation.
+- Tìm IP của robot trong danh sách DHCP/thiết bị của router hoặc serial log
+  ESP-IDF.
+- Lấy token điều khiển nội bộ gồm sáu chữ số qua một phiên voice/cloud đã
+  xác thực bằng tool `self.local_control.get_token`.
+- Cài Node.js 18 trở lên và npm trên máy dùng để chạy giao diện.
+
+### Khởi động giao diện điều khiển
+
+```sh
+cd apps/controller-web
+npm install                 # chỉ cần ở lần đầu
+npm run dev:lan
+```
+
+Vite sẽ in ra địa chỉ **Local** và **Network**:
+
+| Thiết bị mở giao diện | Địa chỉ cần mở |
+|---|---|
+| Trình duyệt trên chính máy đang chạy giao diện | `http://localhost:5173` |
+| iPhone, Android hoặc máy tính khác | địa chỉ Network, ví dụ `http://192.168.1.20:5173` |
+
+`localhost` trên điện thoại là chính điện thoại đó, không phải máy tính đang
+chạy giao diện. Hãy cho phép truy cập mạng nội bộ/tường lửa khi macOS hoặc
+Windows hỏi.
+
+Trong trang Yana Wheelbot, nhập:
+
+- **Device URL:** `ws://<IP-robot>:8080/ws`
+- **Pairing token:** token sáu chữ số đã lấy ở trên
+
+Trang web sẽ tự nối `?token=<mã>` vào URL bắt tay WebSocket. Bấm **Kết nối**,
+nâng bánh xe khỏi mặt đất ở lần thử đầu, kiểm tra nút **STOP**, rồi mới thử
+chạy dưới sàn. Lệnh di chuyển dùng các xung an toàn ngắn được gia hạn liên
+tục; thả nút, mất focus trình duyệt hoặc mất kết nối sẽ dừng động cơ.
+
+### Xử lý lỗi kết nối
+
+- **Không mở được địa chỉ Network:** dùng `npm run dev:lan`, kiểm tra tường
+  lửa máy chủ và bảo đảm hai thiết bị cùng mạng Wi-Fi không phải mạng khách.
+- **Mở được trang nhưng không nối được robot:** kiểm tra IP robot, cổng
+  `8080`, token và AP/client isolation.
+- **HTTP 401 hoặc WebSocket ngắt ngay:** token thiếu hoặc sai. Lấy lại token;
+  nếu nghi bị lộ, đổi bằng `self.local_control.rotate_token`.
+- **Trang chạy bằng HTTPS không mở được `ws://`:** trình duyệt chặn mixed
+  content. Hãy chạy HTTP nội bộ như lệnh trên; firmware hiện chưa có `wss://`.
+- Không mở port `8080` ra Internet bằng port forwarding. Kết nối nội bộ có
+  token nhưng chưa mã hóa, chỉ nên dùng trong LAN đáng tin cậy.
+
+### Tình trạng tương thích giao thức
+
+Đối chiếu mã nguồn cho thấy toàn bộ 25 tên MCP tool và kiểu tham số giao diện
+web sử dụng đều khớp với phần đăng ký tool trong firmware. URL bắt tay là
+`ws://<IP-robot>:8080/ws?token=<mã>`; frame text dùng JSON-RPC 2.0, phiên bản
+MCP `2024-11-05`, với ba method `initialize`, `tools/list` và `tools/call`.
+
+Đây là tập con JSON-RPC tương thích MCP của firmware, chưa phải một transport
+MCP đa dụng hoàn chỉnh. Response hiện được phát tới mọi local client đã xác
+thực, vì vậy chỉ nên mở một bảng điều khiển nội bộ tại một thời điểm để tránh
+trùng request ID. Lệnh voice và lệnh local cũng có thể chồng nhau; lệnh di
+chuyển mới nhất sẽ thắng. Các đường này đã được kiểm tra ở mức mã nguồn/build
+nhưng vẫn cần test end-to-end trên robot thật.
+
 ## Yêu cầu
 
 - ESP-IDF v6.0 trở lên; v6.0.2 là SDK ổn định được khuyến nghị. Xem

@@ -13,6 +13,18 @@ npm install
 npm run dev
 ```
 
+To open the controller from an iPhone, Android device, or another computer
+on the same Wi-Fi, expose the development server to the local network:
+
+```sh
+npm run dev:lan
+```
+
+Open the printed **Network** URL (for example `http://192.168.1.20:5173`) on
+the other device. Do not use `localhost` there: it refers to that phone or
+computer, not to the machine running Vite. A Mac or Windows firewall may ask
+for permission to accept local-network connections.
+
 Open the printed local URL, type `ws://<device-ip>:8080/ws` into the
 connection bar, enter the device's pairing token (get it via voice/cloud
 control by asking for `self.local_control.get_token`) in the Token field,
@@ -39,6 +51,33 @@ npm run build
 
 Output goes to `dist/` — a static bundle, servable from any static host or
 opened locally.
+
+## Responsive layouts
+
+The controller uses separate layouts instead of shrinking the desktop UI:
+
+- Phones up to 700 px use one column, large touch controls, and a stacked
+  connection form.
+- Tablets and landscape phones use two columns so movement stays visible
+  beside the secondary controls.
+- Mac and Windows desktops use a three-column dashboard capped at 1440 px.
+
+Notched-phone safe areas are respected, touch targets are at least 44 px,
+and text inputs remain at 16 px on touch devices to avoid unwanted Safari
+zoom. The UI uses system fonts so the local controller does not depend on an
+internet font service.
+
+With the development server running, audit the supported viewport matrix in
+an installed Google Chrome:
+
+```sh
+npm run audit:responsive
+```
+
+Set `CONTROLLER_URL`, `CHROME_PATH`, or `AUDIT_SCREENSHOT_DIR` to override
+the defaults or capture screenshots. The audit covers common iPhone,
+Android, iPad, Mac, and Windows viewport sizes in English, Vietnamese, and
+Korean.
 
 ## Structure
 

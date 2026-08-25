@@ -4,7 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "audit:responsive": "node scripts/responsive-audit.mjs",
     "dev": "vite",
+    "dev:lan": "vite --host 0.0.0.0",
     "build": "tsc -b && vite build",
     "preview": "vite preview"
   },
