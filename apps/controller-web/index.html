@@ -2,14 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#090e1a" />
     <title>Yana Wheelbot Controller</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="./src/style.css" />
   </head>
   <body>
@@ -19,8 +14,8 @@
         <h1>Yana Wheelbot</h1>
       </div>
       <div class="connect-bar">
-        <input id="device-url" type="text" data-i18n-placeholder="deviceUrlPlaceholder" />
-        <input id="device-token" type="text" data-i18n-placeholder="tokenPlaceholder" size="10" />
+        <input id="device-url" type="text" data-i18n-placeholder="deviceUrlPlaceholder" aria-label="Device WebSocket URL" autocapitalize="off" autocomplete="url" spellcheck="false" />
+        <input id="device-token" type="text" data-i18n-placeholder="tokenPlaceholder" aria-label="Device token" autocapitalize="off" autocomplete="off" spellcheck="false" size="10" />
         <button id="connect-btn" data-i18n="connect">Connect</button>
         <select id="lang-select" aria-label="Language">
           <option value="en">English</option>
@@ -38,7 +33,7 @@
     <main class="dashboard">
       <section class="panel panel-movement">
         <h2 data-i18n="movementTitle">Movement</h2>
-        <div class="row">
+        <div class="row movement-settings">
           <label><span data-i18n="safetyPulse">Safety pulse (ms)</span> <input id="duration-ms" type="number" value="750" min="250" max="2000" /></label>
           <label><span data-i18n="speed">Speed</span> <input id="speed" type="number" value="80" min="0" max="100" /></label>
         </div>
@@ -65,7 +60,7 @@
           <input id="arm-angle" type="range" min="0" max="180" value="90" />
           <output id="arm-angle-value" for="arm-angle">90°</output>
         </div>
-        <div class="row">
+        <div class="row arm-actions">
           <button id="arm-wave" data-i18n="wave">Wave</button>
           <button id="arm-release" data-i18n="releaseArm">Release arm</button>
         </div>
@@ -74,7 +69,7 @@
           <input id="neck-angle" type="range" min="0" max="180" value="90" />
           <output id="neck-angle-value" for="neck-angle">90°</output>
         </div>
-        <div class="row">
+        <div class="row neck-actions">
           <button id="neck-left" data-i18n="turnLeft">Turn left</button>
           <button id="neck-center" data-i18n="center">Center</button>
           <button id="neck-right" data-i18n="turnRight">Turn right</button>
@@ -92,7 +87,7 @@
           <dt data-i18n="lastCommandFrom">Last command from</dt>
           <dd id="control-source">—</dd>
         </dl>
-        <div class="row">
+        <div class="row cliff-actions">
           <label><input id="cliff-enabled" type="checkbox" checked /> <span data-i18n="enabled">Enabled</span></label>
           <label><span data-i18n="thresholdMm">Threshold (mm)</span> <input id="cliff-threshold" type="number" value="50" min="5" max="500" /></label>
           <button id="cliff-apply" data-i18n="save">Save</button>
@@ -102,7 +97,7 @@
 
       <section class="panel panel-quick">
         <h2 data-i18n="ledsTitle">LEDs</h2>
-        <div class="row">
+        <div class="row led-actions">
           <button data-mode="follow_state" data-i18n="followState">Follow state</button>
           <button data-mode="both_on" data-i18n="bothOn">Both on</button>
           <button data-mode="both_off" data-i18n="bothOff">Both off</button>
