@@ -88,6 +88,23 @@ const en: Dict = {
   orientation: "Orientation",
   orientationPortrait: "Portrait (128x160)",
   orientationLandscape: "Landscape",
+
+  flashLink: "Flash firmware",
+  flashTitle: "Flash firmware",
+  flashIntro: "Write a merged firmware image (build/merged-binary.bin) to the board over USB, directly from this browser.",
+  flashUnsupported: "This browser does not support the Web Serial API. Use Google Chrome or Microsoft Edge over HTTPS or localhost.",
+  flashSelectPort: "Select device",
+  flashConnectedTo: "Connected: {chip}",
+  flashConnectFailed: "Connection failed",
+  flashChooseFile: "Choose firmware file (.bin)",
+  flashNoFile: "No file selected",
+  flashFileLoaded: "Loaded {name} ({size} bytes)",
+  flashButton: "Flash",
+  flashInProgress: "Flashing…",
+  flashDone: "Flash complete. Device is rebooting.",
+  flashFailed: "Flash failed",
+  flashOffsetNote: "Assumes a single merged image built with idf.py merge-bin, written at offset 0x0. Do not select a bare app.bin, bootloader.bin, or partition-table.bin here.",
+  flashBackLink: "← Back to controller",
 };
 
 const vi: Dict = {
@@ -170,6 +187,23 @@ const vi: Dict = {
   orientation: "Hướng màn hình",
   orientationPortrait: "Dọc (128x160)",
   orientationLandscape: "Ngang",
+
+  flashLink: "Nạp firmware",
+  flashTitle: "Nạp firmware",
+  flashIntro: "Ghi file firmware đã gộp (build/merged-binary.bin) vào board qua USB, trực tiếp từ trình duyệt.",
+  flashUnsupported: "Trình duyệt này không hỗ trợ Web Serial API. Dùng Google Chrome hoặc Microsoft Edge, qua HTTPS hoặc localhost.",
+  flashSelectPort: "Chọn thiết bị",
+  flashConnectedTo: "Đã kết nối: {chip}",
+  flashConnectFailed: "Kết nối thất bại",
+  flashChooseFile: "Chọn file firmware (.bin)",
+  flashNoFile: "Chưa chọn file",
+  flashFileLoaded: "Đã nạp {name} ({size} byte)",
+  flashButton: "Nạp",
+  flashInProgress: "Đang nạp…",
+  flashDone: "Nạp xong. Thiết bị đang khởi động lại.",
+  flashFailed: "Nạp thất bại",
+  flashOffsetNote: "Giả định đây là file đã gộp bằng idf.py merge-bin, ghi tại offset 0x0. Không chọn app.bin, bootloader.bin, hoặc partition-table.bin riêng lẻ ở đây.",
+  flashBackLink: "← Về trang điều khiển",
 };
 
 const ko: Dict = {
@@ -252,6 +286,23 @@ const ko: Dict = {
   orientation: "화면 방향",
   orientationPortrait: "세로 (128x160)",
   orientationLandscape: "가로",
+
+  flashLink: "펌웨어 플래시",
+  flashTitle: "펌웨어 플래시",
+  flashIntro: "병합된 펌웨어 이미지(build/merged-binary.bin)를 USB를 통해 브라우저에서 바로 보드에 씁니다.",
+  flashUnsupported: "이 브라우저는 Web Serial API를 지원하지 않습니다. HTTPS 또는 localhost에서 Google Chrome이나 Microsoft Edge를 사용하세요.",
+  flashSelectPort: "장치 선택",
+  flashConnectedTo: "연결됨: {chip}",
+  flashConnectFailed: "연결 실패",
+  flashChooseFile: "펌웨어 파일 선택 (.bin)",
+  flashNoFile: "선택된 파일 없음",
+  flashFileLoaded: "{name} 로드됨 ({size} 바이트)",
+  flashButton: "플래시",
+  flashInProgress: "플래시 중…",
+  flashDone: "플래시 완료. 장치가 재부팅 중입니다.",
+  flashFailed: "플래시 실패",
+  flashOffsetNote: "idf.py merge-bin으로 병합한 단일 이미지를 오프셋 0x0에 쓴다고 가정합니다. app.bin, bootloader.bin, partition-table.bin을 개별적으로 선택하지 마세요.",
+  flashBackLink: "← 컨트롤러로 돌아가기",
 };
 
 const dictionaries: Record<Lang, Dict> = { en, vi, ko };
