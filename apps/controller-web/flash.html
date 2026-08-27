@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#090e1a" />
+    <title>Yana Wheelbot — Flash firmware</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">YA</span>
+        <h1 data-i18n="flashTitle">Flash firmware</h1>
+      </div>
+      <div class="connect-bar connect-bar-simple">
+        <a id="back-link" href="./index.html" data-i18n="flashBackLink">← Back to controller</a>
+        <select id="lang-select" aria-label="Language">
+          <option value="en">English</option>
+          <option value="vi">Tiếng Việt</option>
+          <option value="ko">한국어</option>
+        </select>
+      </div>
+    </header>
+
+    <main class="dashboard">
+      <section id="support-warning" class="panel panel-status" hidden>
+        <p class="control-help" data-i18n="flashUnsupported">
+          This browser does not support the Web Serial API. Use Google Chrome or Microsoft Edge over HTTPS or localhost.
+        </p>
+      </section>
+
+      <section class="panel panel-movement">
+        <h2 data-i18n="flashTitle">Flash firmware</h2>
+        <p class="control-help" data-i18n="flashIntro">
+          Write a merged firmware image (build/merged-binary.bin) to the board over USB, directly from this browser.
+        </p>
+        <p class="control-help" data-i18n="flashOffsetNote">
+          Assumes a single merged image built with idf.py merge-bin, written at offset 0x0. Do not select a bare
+          app.bin, bootloader.bin, or partition-table.bin here.
+        </p>
+
+        <div class="row">
+          <button id="connect-btn" data-i18n="flashSelectPort">Select device</button>
+          <span id="chip-info" class="status-pill status-pill-quiet" data-i18n="dash">—</span>
+        </div>
+
+        <div class="row">
+          <label for="firmware-file"><span data-i18n="flashChooseFile">Choose firmware file (.bin)</span></label>
+          <input id="firmware-file" type="file" accept=".bin" />
+        </div>
+        <p id="file-status" class="control-help" data-i18n="flashNoFile">No file selected</p>
+
+        <div class="row">
+          <button id="flash-btn" disabled data-i18n="flashButton">Flash</button>
+        </div>
+        <progress id="progress-bar" max="100" value="0" hidden></progress>
+      </section>
+
+      <section class="panel panel-status">
+        <h2>Log</h2>
+        <pre id="log" class="output" aria-live="polite"></pre>
+      </section>
+    </main>
+
+    <script type="module" src="./src/flash.ts"></script>
+  </body>
+</html>

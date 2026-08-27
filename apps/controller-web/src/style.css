@@ -110,7 +110,7 @@ h1 {
 .connect-bar {
   display: grid;
   flex: 1 1 600px;
-  grid-template-columns: minmax(220px, 1fr) minmax(120px, 170px) auto auto;
+  grid-template-columns: minmax(220px, 1fr) minmax(120px, 170px) auto auto auto;
   gap: 0.5rem;
   align-items: center;
   min-width: 0;
@@ -118,6 +118,37 @@ h1 {
 
 .connect-bar > * {
   min-width: 0;
+}
+
+.connect-bar-simple {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.connect-bar a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.45rem 0.75rem;
+  background: var(--panel-solid);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.connect-bar a:hover {
+  border-color: var(--accent);
+}
+
+.connect-bar a:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 1px;
 }
 
 .connect-bar input {

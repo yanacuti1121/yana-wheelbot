@@ -43,6 +43,35 @@ at the end of that pulse if the browser freezes or the connection disappears.
 The **Safety pulse** field controls its duration; keep it short enough for the
 robot's speed and environment.
 
+## Flash firmware from the browser
+
+`flash.html` (linked from the controller header as **Flash firmware**) writes a
+prebuilt firmware image to the board over USB, using the
+[Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API)
+via [`esptool-js`](https://github.com/espressif/esptool-js) — no `esptool.py`
+or ESP-IDF install required on the flashing machine.
+
+```sh
+npm run dev
+```
+
+Open the printed local URL's `/flash.html`, click **Select device**, pick the
+board's serial port in the browser prompt, choose the firmware `.bin` file,
+then click **Flash**.
+
+**Known limitations:**
+
+- Requires Google Chrome or Microsoft Edge (Web Serial API support) and a
+  [secure context](https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts)
+  — `https://` or `localhost`. It will not work when this dev server is
+  exposed over plain `http://` to another device on the LAN (see
+  `npm run dev:lan` above); flash from the machine the board's USB cable is
+  actually plugged into.
+- Only flashes a single **merged** image — the output of `idf.py merge-bin`
+  (`build/merged-binary.bin`), written at offset `0x0`. It does not flash a
+  bare `app.bin`, `bootloader.bin`, or `partition-table.bin` individually,
+  and does not implement `espefuse`/`espsecure`-equivalent operations.
+
 ## Build for static hosting
 
 ```sh
@@ -88,6 +117,9 @@ Korean.
   (`main/boards/yana-wheelbot/*_controller.cc`).
 - `src/main.ts` — wires the DOM controls in `index.html` to `mcp-client.ts`
   calls.
+- `src/flash.ts` — browser-based firmware flashing (`flash.html`) using
+  `esptool-js` over Web Serial; unrelated to the WebSocket/MCP control
+  protocol used by everything else in this app.
 
 ## Known limitation
 
