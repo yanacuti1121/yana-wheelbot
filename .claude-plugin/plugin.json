@@ -1,0 +1,98 @@
+{
+  "schema_version": "1",
+  "name": "yana-ai",
+  "display_name": "Yana AI",
+  "version": "1.4.1",
+  "description": "Personal agent operating system for Claude Code. Safety hooks, memory tiers, agents, commands, and cross-engine hard enforcement.",
+  "author": {
+    "name": "Vũ Văn Tâm",
+    "email": "phamlongh230@gmail.com",
+    "url": "https://github.com/yanacuti1121"
+  },
+  "homepage": "https://yanacuti1121.github.io/yana-ai/",
+  "repository": "https://github.com/yanacuti1121/yana-ai",
+  "license": "Apache-2.0",
+  "keywords": [
+    "hooks",
+    "safety",
+    "memory",
+    "agents",
+    "gates",
+    "guards",
+    "circuit-breaker",
+    "sovereign",
+    "claude-code",
+    "codex",
+    "cursor",
+    "audit",
+    "ai-agent",
+    "agent-os"
+  ],
+  "metadata": {
+    "openclaw": {
+      "emoji": "🛡️",
+      "requires": {
+        "env": [],
+        "optionalEnv": [],
+        "bins": [
+          "bash",
+          "python3",
+          "jq",
+          "openssl"
+        ]
+      },
+      "tags": [
+        "hooks",
+        "safety",
+        "memory",
+        "agents",
+        "gates",
+        "guards",
+        "circuit-breaker",
+        "sovereign",
+        "claude-code",
+        "codex",
+        "cursor",
+        "audit",
+        "ai-agent",
+        "agent-os"
+      ],
+      "homepage": "https://yanacuti1121.github.io/yana-ai/"
+    }
+  },
+  "install": {
+    "type": "zip",
+    "source": "https://github.com/yanacuti1121/yana-ai/releases/latest/download/yana-ai-latest.zip",
+    "target": ".claude/",
+    "post_install": "bash .claude/tests/hooks/run-hook-tests.sh"
+  },
+  "contents": {
+    "hooks": 65,
+    "commands": 170,
+    "agents": 100,
+    "scripts": 130,
+    "skills": 2025,
+    "rules": 71,
+    "checks": 830,
+    "checks_breakdown": {
+      "hook_tests": 65,
+      "audit_chain_tests": 12,
+      "skill_trigger_checks": 682,
+      "command_smoke_checks": 6,
+      "red_team_scenarios": 65
+    },
+    "memory_tiers": [
+      "L1_atomic",
+      "L2_session"
+    ]
+  },
+  "requires": {
+    "claude_code": ">=1.0.0",
+    "shell": "bash",
+    "tools": [
+      "jq",
+      "openssl",
+      "python3"
+    ]
+  }
+}

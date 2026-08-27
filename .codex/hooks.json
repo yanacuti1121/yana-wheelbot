@@ -1,0 +1,246 @@
+{
+  "description": "Yana AI lifecycle enforcement for Codex.",
+  "hooks": {
+    "PreCompact": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/precompact-priority-injection.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30,
+            "statusMessage": "Injecting compaction priority requirements"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/guard-destructive.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30,
+            "statusMessage": "Checking destructive command policy"
+          },
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/guard-blast-radius.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30,
+            "statusMessage": "Checking command blast radius"
+          },
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/tool-proxy-enforcer.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/sandbox-wrap.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|Write|Edit|MultiEdit|WebFetch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/tool-validator.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30,
+            "statusMessage": "Validating tool input"
+          }
+        ]
+      },
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/giamthi-halt-check.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/scope-guard.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/freeze-scope.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/infra-review-reminder.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/token-budget-guard.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/per-tool-circuit-breaker.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/entry-point-verify-reminder.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/audit-log.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/budget-sentinel.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/verify-evidence-track.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/tool-guardrails-detector.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\" record",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "bash \"$(git rev-parse --show-toplevel)/.codex/hooks/context-compress-trigger.sh\"",
+            "timeout": 30,
+            "statusMessage": "Checking context budget"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/giamthi-halt-check.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30,
+            "statusMessage": "Checking giam thi halt lock"
+          },
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"Yana AI is active. Read AGENTS.md and follow the truth and action gates before making changes. At the first prompt, invoke $yana-command-idea-loop before handling the request.\"}}'",
+            "timeout": 3,
+            "statusMessage": "Loading Yana AI guidance"
+          },
+          {
+            "type": "command",
+            "command": "python3 -c \"from headroom import compress; print('[headroom] ready')\" 2>/dev/null || true",
+            "timeout": 10,
+            "statusMessage": "Loading context compressor"
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/agent-budget-gate.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/agent-pixel-notify.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\" start",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/log-agent.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30,
+            "statusMessage": "Recording subagent start"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/agent-pixel-notify.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\" stop",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/giamthi-halt-check.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30,
+            "statusMessage": "Checking giam thi halt lock"
+          },
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/auto-decompose.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/session-bootstrap.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/truth-gate-guard.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/tool-guardrails-detector.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\" reset",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "ROOT=$(git rev-parse --show-toplevel); CLAUDE_PROJECT_DIR=\"$ROOT\" YANA_GUARDED_HOOK=\"$ROOT/.codex/hooks/context-compress-stop.sh\" bash \"$ROOT/.codex/hooks/hook-timeout-guard.sh\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
