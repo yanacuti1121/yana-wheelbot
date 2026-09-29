@@ -9,7 +9,16 @@ XiaoZhi AI Chatbot firmware base.
 ## Yana Wheelbot
 
 <img src="main/boards/yana-wheelbot/chassis/chassis-render.png" alt="Yana Wheelbot chassis, OpenSCAD render" width="480">
-<img src="main/boards/yana-wheelbot/wiring-diagram.svg" alt="Yana Wheelbot wiring diagram" width="480">
+<img src="main/boards/yana-wheelbot/wiring-diagram.svg" alt="Complete Yana Wheelbot wiring diagram with power path and GPIO signals" width="960">
+
+**Wiring images:** [complete default wiring diagram](main/boards/yana-wheelbot/wiring-diagram.svg) ·
+[pin-by-pin checklist](main/boards/yana-wheelbot/wiring-pin-table.svg) ·
+[KST-style reference card](main/boards/yana-wheelbot/wiring-kst-reference.png).
+The reference card shows ST7735/VL6180X with BL tied to 3V3 and leaves
+GPIO20/21 undecided. It is **not** the firmware default: this repository
+defaults to ST7789/VL53L0X, drives BL from GPIO9, and uses GPIO20/21 for
+arm/neck servos. Follow the complete diagram or the board's wiring tables
+when assembling this firmware.
 
 - Differential-drive movement, motor backend selectable at runtime
   (continuous-rotation servo pair or L298N DC driver)

@@ -3,19 +3,16 @@
 
 #include <driver/gpio.h>
 
-// GPIO defaults below are aligned with the KST AI Robot's publicly published
-// wiring diagram (ai.kenhsangtao.com/docs/So-do-dau-noi-ST7735.svg) -- a
-// real, community-tested ESP32-S3 robot with the same feature set (dual
-// motor backend, arm/neck servos, ToF anti-fall, dual LED, touch sensor).
-// Only the pin *numbers* are taken from that public diagram; no firmware
-// code was copied from their (closed-source, no reuse license stated)
-// binary. Every pin below matches their diagram exactly, including
-// audio_i2s_spk_gpio_dout (MAX98357A DIN -> GPIO17) and touch_sensor_pin
-// (TTP223 OUT -> GPIO7), both confirmed from the diagram image (previously
-// unconfirmed guesses in earlier commits). display_backlight_pin is NOT in
-// their diagram -- their ST7735 module ties BL straight to 3V3 (no
-// software control) -- so it remains this project's own free-pin pick, now
-// moved off GPIO17 since that pin is confirmed in use for audio DIN.
+// Most signal GPIO numbers below were cross-checked against the KST AI
+// Robot's public wiring diagram
+// (ai.kenhsangtao.com/docs/So-do-dau-noi-ST7735.svg). The reference image
+// shows buttons at GPIO20/21, while this project uses those numbers for
+// arm/neck servos. It ties ST7735 BL to 3V3, while this project controls
+// the default ST7789 backlight through GPIO9. The default ToF model also
+// differs. These are project-specific choices, not KST-verified hardware.
+// Only public pin numbers and part names informed this configuration; no
+// code from KST's closed-source binary was copied. Verify actual modules
+// and board pin availability before assembly.
 // Runtime-remappable pins (motor IN1-4, servo stop-pulse/reverse) are
 // stored in NVS via Settings and can be changed from the app without
 // re-flashing; the constants here are only the first-boot defaults. Verify
@@ -97,7 +94,7 @@ constexpr HardwareConfig WHEELBOT_HARDWARE_CONFIG = {
     .led_left_pin = GPIO_NUM_3,
     .led_right_pin = GPIO_NUM_18,
 
-    // Matches KST wiring diagram exactly.
+    // Same GPIO numbers as KST's buttons, but used for project-specific servos.
     .arm_servo_pin = GPIO_NUM_20,
     .neck_servo_pin = GPIO_NUM_21,
 

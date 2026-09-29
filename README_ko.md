@@ -9,7 +9,14 @@ ESP32-S3 음성 AI 로보틱스 플랫폼 — 모터/서보 제어, 낙하 방�
 ## Yana Wheelbot
 
 <img src="main/boards/yana-wheelbot/chassis/chassis-render.png" alt="Yana Wheelbot 섀시, OpenSCAD 렌더" width="480">
-<img src="main/boards/yana-wheelbot/wiring-diagram.svg" alt="Yana Wheelbot 배선도" width="480">
+<img src="main/boards/yana-wheelbot/wiring-diagram.svg" alt="전원 경로와 GPIO 신호를 포함한 Yana Wheelbot 전체 배선도" width="960">
+
+**배선 이미지:** [기본 펌웨어 전체 배선도](main/boards/yana-wheelbot/wiring-diagram.svg) ·
+[핀별 표](main/boards/yana-wheelbot/wiring-pin-table.svg) ·
+[KST 방식 참고 카드](main/boards/yana-wheelbot/wiring-kst-reference.png).
+참고 카드는 ST7735/VL6180X와 BL→3V3을 표시하며 GPIO20/21의 용도를
+확정하지 않습니다. 저장소의 기본 펌웨어는 ST7789/VL53L0X,
+BL→GPIO9, 팔/목 서보→GPIO20/21을 사용합니다.
 
 - 차동 구동 이동, 런타임에 선택 가능한 모터 드라이버(연속 회전 서보 또는
   L298N DC 드라이버)

@@ -1,200 +1,170 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1250" font-family="Helvetica, Arial, sans-serif">
-  <rect x="0" y="0" width="1600" height="1250" fill="#0f1720"/>
-
-  <text x="40" y="40" font-size="28" font-weight="700" fill="#e6f6ff">Yana Wheelbot — Wiring Diagram (default config)</text>
-  <text x="40" y="64" font-size="14" fill="#8fb3c7">GPIO numbers confirmed against the KST AI Robot's public wiring diagram (ai.kenhsangtao.com) -- own layout/artwork, one line per pin, not a copy of theirs.</text>
-
-  <!-- shared 3V3 rail -->
-  <line x1="120" y1="90" x2="1480" y2="90" stroke="#8fb3c7" stroke-width="1.5" stroke-dasharray="5,4"/>
-  <circle cx="120" cy="90" r="4" fill="#8fb3c7"/>
-  <text x="20" y="94" font-size="13" font-weight="700" fill="#8fb3c7">3V3</text>
-
-  <!-- shared GND rail -->
-  <line x1="120" y1="1180" x2="1480" y2="1180" stroke="#7d8994" stroke-width="1.5" stroke-dasharray="5,4"/>
-  <circle cx="120" cy="1180" r="4" fill="#7d8994"/>
-  <text x="20" y="1184" font-size="13" font-weight="700" fill="#7d8994">GND</text>
-
-  <!-- MCU box -->
-  <rect x="660" y="400" width="280" height="270" rx="14" fill="#16232e" stroke="#2fa6d9" stroke-width="2"/>
-  <text x="800" y="510" font-size="22" font-weight="700" fill="#e6f6ff" text-anchor="middle">ESP32-S3</text>
-  <text x="800" y="534" font-size="14" fill="#8fb3c7" text-anchor="middle">WROOM-1 N16R8</text>
-  <text x="800" y="556" font-size="13" fill="#5b7d8f" text-anchor="middle">Yana Wheelbot</text>
-  <rect x="770" y="590" width="60" height="24" rx="4" fill="#0f1720" stroke="#2fa6d9"/>
-  <text x="800" y="606" font-size="12" fill="#8fb3c7" text-anchor="middle">USB-C</text>
-  <text x="800" y="640" font-size="12" fill="#5b7d8f" text-anchor="middle">GPIO0 = boot button</text>
-
-  <!-- ============ LEFT COLUMN ============ -->
-
-  <!-- INMP441 -->
-  <rect x="40" y="110" width="260" height="130" rx="10" fill="#122b1e" stroke="#3fbf7f" stroke-width="2"/>
-  <text x="60" y="138" font-size="17" font-weight="700" fill="#c9f5df">INMP441 (mic, I2S)</text>
-  <text x="60" y="162" font-size="13" fill="#9fe3bd">VCC → 3V3</text>
-  <text x="60" y="182" font-size="13" fill="#9fe3bd">WS  → GPIO4</text>
-  <text x="60" y="202" font-size="13" fill="#9fe3bd">SCK → GPIO5</text>
-  <text x="60" y="222" font-size="13" fill="#9fe3bd">SD  → GPIO6</text>
-  <line x1="300" y1="162" x2="120" y2="90" stroke="#3fbf7f" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <line x1="300" y1="182" x2="660" y2="420" stroke="#3fbf7f" stroke-width="2"/>
-  <text x="470" y="288" font-size="12" fill="#9fe3bd">GPIO4</text>
-  <line x1="300" y1="202" x2="660" y2="440" stroke="#3fbf7f" stroke-width="2"/>
-  <text x="470" y="312" font-size="12" fill="#9fe3bd">GPIO5</text>
-  <line x1="300" y1="222" x2="660" y2="460" stroke="#3fbf7f" stroke-width="2"/>
-  <text x="470" y="336" font-size="12" fill="#9fe3bd">GPIO6</text>
-  <text x="60" y="230" font-size="11" fill="#5b8f74">L/R → GND (tied low)</text>
-
-  <!-- MAX98357A -->
-  <rect x="40" y="260" width="260" height="150" rx="10" fill="#122233" stroke="#4a8fe0" stroke-width="2"/>
-  <text x="60" y="288" font-size="17" font-weight="700" fill="#cfe3ff">MAX98357A (speaker amp, I2S)</text>
-  <text x="60" y="312" font-size="13" fill="#a9c9f2">VIN  → own 5V rail</text>
-  <text x="60" y="332" font-size="13" fill="#a9c9f2">DIN  → GPIO17</text>
-  <text x="60" y="352" font-size="13" fill="#a9c9f2">BCLK → GPIO16</text>
-  <text x="60" y="372" font-size="13" fill="#a9c9f2">LRC  → GPIO15</text>
-  <text x="60" y="392" font-size="11" fill="#5b7fa3">GAIN→GND · SD→VIN (own rail, not MCU)</text>
-  <line x1="300" y1="332" x2="660" y2="480" stroke="#4a8fe0" stroke-width="2"/>
-  <text x="470" y="404" font-size="12" fill="#a9c9f2">GPIO17</text>
-  <line x1="300" y1="352" x2="660" y2="500" stroke="#4a8fe0" stroke-width="2"/>
-  <text x="470" y="428" font-size="12" fill="#a9c9f2">GPIO16</text>
-  <line x1="300" y1="372" x2="660" y2="520" stroke="#4a8fe0" stroke-width="2"/>
-  <text x="470" y="452" font-size="12" fill="#a9c9f2">GPIO15</text>
-  <line x1="300" y1="392" x2="120" y2="1180" stroke="#4a8fe0" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <text x="60" y="416" font-size="11" fill="#e0a94a">⚠ needs its own strong 5V rail</text>
-
-  <!-- TTP223 -->
-  <rect x="40" y="430" width="260" height="100" rx="10" fill="#2a2016" stroke="#e0b24a" stroke-width="2"/>
-  <text x="60" y="458" font-size="17" font-weight="700" fill="#ffe9b8">TTP223 (touch sensor)</text>
-  <text x="60" y="482" font-size="13" fill="#f2d79a">VCC → 3V3</text>
-  <text x="60" y="502" font-size="13" fill="#f2d79a">OUT → GPIO7</text>
-  <text x="60" y="520" font-size="11" fill="#b89457">GND → GND · double-tap toggles chat</text>
-  <line x1="300" y1="482" x2="120" y2="90" stroke="#e0b24a" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <line x1="300" y1="502" x2="660" y2="540" stroke="#e0b24a" stroke-width="2"/>
-  <text x="470" y="516" font-size="12" fill="#f2d79a">GPIO7</text>
-  <line x1="300" y1="520" x2="120" y2="1180" stroke="#e0b24a" stroke-width="1.5" stroke-dasharray="4,3"/>
-
-  <!-- ToF sensor -->
-  <rect x="40" y="550" width="260" height="140" rx="10" fill="#122233" stroke="#4a8fe0" stroke-width="2"/>
-  <text x="60" y="578" font-size="17" font-weight="700" fill="#cfe3ff">ToF anti-fall (I2C)</text>
-  <text x="60" y="598" font-size="12" fill="#a9c9f2">VL53L0X (default) or VL6180X</text>
-  <text x="60" y="620" font-size="13" fill="#a9c9f2">VCC → 3V3</text>
-  <text x="60" y="640" font-size="13" fill="#a9c9f2">SDA → GPIO1</text>
-  <text x="60" y="660" font-size="13" fill="#a9c9f2">SCL → GPIO2</text>
-  <text x="60" y="678" font-size="11" fill="#5b7fa3">GND → GND</text>
-  <line x1="300" y1="620" x2="120" y2="90" stroke="#4a8fe0" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <line x1="300" y1="640" x2="660" y2="580" stroke="#4a8fe0" stroke-width="2"/>
-  <text x="470" y="600" font-size="12" fill="#a9c9f2">GPIO1</text>
-  <line x1="300" y1="660" x2="660" y2="600" stroke="#4a8fe0" stroke-width="2"/>
-  <text x="470" y="624" font-size="12" fill="#a9c9f2">GPIO2</text>
-  <line x1="300" y1="678" x2="120" y2="1180" stroke="#4a8fe0" stroke-width="1.5" stroke-dasharray="4,3"/>
-
-  <!-- L298N (optional, dashed) -->
-  <rect x="40" y="710" width="260" height="180" rx="10" fill="#1a1a1a" stroke="#666" stroke-width="2" stroke-dasharray="6,5"/>
-  <text x="60" y="738" font-size="17" font-weight="700" fill="#bbb">L298N (optional motor driver)</text>
-  <text x="60" y="758" font-size="11" fill="#999">used instead of wheel servos</text>
-  <text x="60" y="782" font-size="13" fill="#bbb">IN1 → GPIO38</text>
-  <text x="60" y="802" font-size="13" fill="#bbb">IN2 → GPIO39</text>
-  <text x="60" y="822" font-size="13" fill="#bbb">IN3 → GPIO40</text>
-  <text x="60" y="842" font-size="13" fill="#bbb">IN4 → GPIO41</text>
-  <text x="60" y="862" font-size="11" fill="#888">remappable via self.wheelbot.set_motor_pins</text>
-  <text x="60" y="880" font-size="11" fill="#e0a94a">⚠ IN1-4 convention unverified — see README</text>
-  <line x1="300" y1="782" x2="660" y2="620" stroke="#777" stroke-width="1.5" stroke-dasharray="6,5"/>
-  <text x="470" y="700" font-size="12" fill="#999">GPIO38</text>
-  <line x1="300" y1="802" x2="660" y2="635" stroke="#777" stroke-width="1.5" stroke-dasharray="6,5"/>
-  <text x="470" y="718" font-size="12" fill="#999">GPIO39</text>
-  <line x1="300" y1="822" x2="660" y2="650" stroke="#777" stroke-width="1.5" stroke-dasharray="6,5"/>
-  <text x="470" y="736" font-size="12" fill="#999">GPIO40</text>
-  <line x1="300" y1="842" x2="660" y2="665" stroke="#777" stroke-width="1.5" stroke-dasharray="6,5"/>
-  <text x="470" y="754" font-size="12" fill="#999">GPIO41</text>
-
-  <!-- HC-SR04 / US-100 (optional, dashed - alternative to the ToF box above, pick one via Kconfig) -->
-  <rect x="40" y="910" width="260" height="180" rx="10" fill="#122233" stroke="#4a8fe0" stroke-width="2" stroke-dasharray="6,5"/>
-  <text x="60" y="938" font-size="17" font-weight="700" fill="#cfe3ff">HC-SR04 / US-100 (ultrasonic)</text>
-  <text x="60" y="958" font-size="11" fill="#7fa3c9">alt. to ToF box above -- pick one via Kconfig</text>
-  <text x="60" y="980" font-size="13" fill="#a9c9f2">VCC  → 5V (own rail, not 3V3)</text>
-  <text x="60" y="1000" font-size="13" fill="#a9c9f2">TRIG → GPIO8</text>
-  <text x="60" y="1020" font-size="13" fill="#a9c9f2">ECHO → GPIO19</text>
-  <text x="60" y="1040" font-size="11" fill="#5b7fa3">GND → GND</text>
-  <text x="60" y="1058" font-size="11" fill="#e0a94a">⚠ ECHO is 5V logic — needs a divider</text>
-  <text x="60" y="1076" font-size="11" fill="#e0a94a">into GPIO19 (unverified — see README)</text>
-  <line x1="300" y1="980" x2="1480" y2="1180" stroke="#4a8fe0" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <line x1="300" y1="1000" x2="660" y2="655" stroke="#4a8fe0" stroke-width="2" stroke-dasharray="6,5"/>
-  <text x="470" y="820" font-size="12" fill="#a9c9f2">GPIO8</text>
-  <line x1="300" y1="1020" x2="660" y2="668" stroke="#4a8fe0" stroke-width="2" stroke-dasharray="6,5"/>
-  <text x="470" y="844" font-size="12" fill="#a9c9f2">GPIO19</text>
-  <line x1="300" y1="1040" x2="120" y2="1180" stroke="#4a8fe0" stroke-width="1.5" stroke-dasharray="4,3"/>
-
-  <!-- ============ RIGHT COLUMN ============ -->
-
-  <!-- Display -->
-  <rect x="1300" y="110" width="260" height="200" rx="10" fill="#241733" stroke="#a06ee0" stroke-width="2"/>
-  <text x="1320" y="138" font-size="17" font-weight="700" fill="#e6d4ff">Display (SPI 128x160)</text>
-  <text x="1320" y="160" font-size="12" fill="#cbb0ea">ST7789 (default) or ST7735</text>
-  <text x="1320" y="182" font-size="13" fill="#cbb0ea">VCC  → 3V3</text>
-  <text x="1320" y="202" font-size="13" fill="#cbb0ea">MOSI → GPIO11</text>
-  <text x="1320" y="222" font-size="13" fill="#cbb0ea">CLK  → GPIO12</text>
-  <text x="1320" y="242" font-size="13" fill="#cbb0ea">DC   → GPIO10</text>
-  <text x="1320" y="262" font-size="13" fill="#cbb0ea">CS   → GPIO13</text>
-  <text x="1320" y="282" font-size="13" fill="#cbb0ea">RST  → GPIO14</text>
-  <text x="1320" y="300" font-size="11" fill="#8a6bad">Backlight → GPIO9 (own pick; KST ties BL to 3V3)</text>
-  <line x1="1300" y1="182" x2="1480" y2="90" stroke="#a06ee0" stroke-width="1.5" stroke-dasharray="4,3"/>
-  <line x1="1300" y1="202" x2="940" y2="420" stroke="#a06ee0" stroke-width="2"/>
-  <text x="1080" y="288" font-size="12" fill="#cbb0ea" text-anchor="end">GPIO11</text>
-  <line x1="1300" y1="222" x2="940" y2="440" stroke="#a06ee0" stroke-width="2"/>
-  <text x="1080" y="312" font-size="12" fill="#cbb0ea" text-anchor="end">GPIO12</text>
-  <line x1="1300" y1="242" x2="940" y2="460" stroke="#a06ee0" stroke-width="2"/>
-  <text x="1080" y="336" font-size="12" fill="#cbb0ea" text-anchor="end">GPIO10</text>
-  <line x1="1300" y1="262" x2="940" y2="480" stroke="#a06ee0" stroke-width="2"/>
-  <text x="1080" y="360" font-size="12" fill="#cbb0ea" text-anchor="end">GPIO13</text>
-  <line x1="1300" y1="282" x2="940" y2="500" stroke="#a06ee0" stroke-width="2"/>
-  <text x="1080" y="384" font-size="12" fill="#cbb0ea" text-anchor="end">GPIO14</text>
-  <line x1="1300" y1="300" x2="940" y2="520" stroke="#a06ee0" stroke-width="2"/>
-  <text x="1080" y="408" font-size="12" fill="#cbb0ea" text-anchor="end">GPIO9</text>
-
-  <!-- LED -->
-  <rect x="1300" y="330" width="260" height="90" rx="10" fill="#332512" stroke="#e0a04a" stroke-width="2"/>
-  <text x="1320" y="358" font-size="17" font-weight="700" fill="#ffd9a0">LED (left/right)</text>
-  <text x="1320" y="382" font-size="13" fill="#f0c080">Left  → GPIO3</text>
-  <text x="1320" y="402" font-size="13" fill="#f0c080">Right → GPIO18</text>
-  <line x1="1300" y1="382" x2="940" y2="540" stroke="#e0a04a" stroke-width="2"/>
-  <text x="1080" y="440" font-size="12" fill="#f0c080" text-anchor="end">GPIO3</text>
-  <line x1="1300" y1="402" x2="940" y2="560" stroke="#e0a04a" stroke-width="2"/>
-  <text x="1080" y="464" font-size="12" fill="#f0c080" text-anchor="end">GPIO18</text>
-
-  <!-- Wheel servo -->
-  <rect x="1300" y="440" width="260" height="130" rx="10" fill="#332512" stroke="#e0a04a" stroke-width="2"/>
-  <text x="1320" y="468" font-size="17" font-weight="700" fill="#ffd9a0">Wheel servo (360°)</text>
-  <text x="1320" y="492" font-size="13" fill="#f0c080">Left  → GPIO47</text>
-  <text x="1320" y="512" font-size="13" fill="#f0c080">Right → GPIO45</text>
-  <text x="1320" y="532" font-size="11" fill="#b8905c">own 5V rail</text>
-  <text x="1320" y="550" font-size="11" fill="#b8905c">GND → shared GND</text>
-  <line x1="1300" y1="492" x2="940" y2="580" stroke="#e0a04a" stroke-width="2"/>
-  <text x="1080" y="488" font-size="12" fill="#f0c080" text-anchor="end">GPIO47</text>
-  <line x1="1300" y1="512" x2="940" y2="600" stroke="#e0a04a" stroke-width="2"/>
-  <text x="1080" y="512" font-size="12" fill="#f0c080" text-anchor="end">GPIO45</text>
-  <line x1="1300" y1="550" x2="1480" y2="1180" stroke="#e0a04a" stroke-width="1.5" stroke-dasharray="4,3"/>
-
-  <!-- Arm/Neck servo -->
-  <rect x="1300" y="590" width="260" height="130" rx="10" fill="#331b2c" stroke="#e04a9c" stroke-width="2"/>
-  <text x="1320" y="618" font-size="17" font-weight="700" fill="#ffb8e0">Arm / Neck servo</text>
-  <text x="1320" y="642" font-size="13" fill="#f0a0cc">Arm  → GPIO20</text>
-  <text x="1320" y="662" font-size="13" fill="#f0a0cc">Neck → GPIO21</text>
-  <text x="1320" y="682" font-size="11" fill="#b8749c">own 5V rail</text>
-  <text x="1320" y="700" font-size="11" fill="#b8749c">GND → shared GND</text>
-  <line x1="1300" y1="642" x2="940" y2="620" stroke="#e04a9c" stroke-width="2"/>
-  <text x="1080" y="628" font-size="12" fill="#f0a0cc" text-anchor="end">GPIO20</text>
-  <line x1="1300" y1="662" x2="940" y2="640" stroke="#e04a9c" stroke-width="2"/>
-  <text x="1080" y="648" font-size="12" fill="#f0a0cc" text-anchor="end">GPIO21</text>
-  <line x1="1300" y1="700" x2="1480" y2="1180" stroke="#e04a9c" stroke-width="1.5" stroke-dasharray="4,3"/>
-
-  <!-- Power -->
-  <rect x="1300" y="740" width="260" height="180" rx="10" fill="#1f2a17" stroke="#7fbf3f" stroke-width="2"/>
-  <text x="1320" y="768" font-size="17" font-weight="700" fill="#d9f2b8">Power</text>
-  <text x="1320" y="790" font-size="13" fill="#bde08a">Li-ion/LiPo 3.7V ~2000mAh</text>
-  <text x="1320" y="810" font-size="13" fill="#bde08a">TP4056 (charge + 5V boost)</text>
-  <text x="1320" y="830" font-size="13" fill="#bde08a">ON/OFF switch</text>
-  <text x="1320" y="852" font-size="11" fill="#8fae5c">⚠ MAX98357A + 2 wheel servos +</text>
-  <text x="1320" y="870" font-size="11" fill="#8fae5c">arm/neck servos need a separate,</text>
-  <text x="1320" y="888" font-size="11" fill="#8fae5c">strong 5V rail -- all GND common</text>
-  <line x1="1300" y1="830" x2="1480" y2="1180" stroke="#7fbf3f" stroke-width="1.5" stroke-dasharray="4,3"/>
-
-  <text x="40" y="1120" font-size="13" fill="#5b7d8f">⚠ = flagged in README as unconfirmed or unverified. Dashed box/line = optional, unused by default, or a shared 3V3/GND rail connection.</text>
-  <text x="40" y="1144" font-size="13" fill="#5b7d8f">GPIO layout credit: KST AI Robot public wiring diagram (ai.kenhsangtao.com) — pin numbers only, no code or artwork copied.</text>
-  <text x="40" y="1168" font-size="13" fill="#5b7d8f">Do not use GPIO36/GPIO37 (reserved for PSRAM on ESP32-S3-WROOM-1 N16R8). HC-SR04 ECHO is 5V logic — use a divider into GPIO19.</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1590" role="img" aria-labelledby="title desc">
+<title id="title">Complete Yana Wheelbot wiring schematic</title>
+<desc id="desc">A clear full wiring schematic with battery-to-boost power path and short horizontal signal wires from all eight modules to ESP32-S3 GPIO terminals.</desc>
+<rect width="1800" height="1590" fill="#f4f7fa"/>
+<text x="45" y="60" fill="#11243a" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700">YANA WHEELBOT · COMPLETE WIRING</text>
+<text x="45" y="90" fill="#50677c" font-family="Arial, Helvetica, sans-serif" font-size="19">ESP32-S3-WROOM-1 N16R8 · firmware defaults · follow each short wire and its GPIO label</text>
+<rect x="45" y="112" width="1710" height="308" rx="18" fill="white" stroke="#d5e0e8" stroke-width="2"/>
+<text x="72" y="151" fill="#173a55" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">POWER FIRST</text>
+<text x="72" y="181" fill="#4f6477" font-family="Arial, Helvetica, sans-serif" font-size="16">USB 5V charges the cell through TP4056. Its protected output feeds a separate regulated 5V boost converter.</text>
+<rect x="70" y="209" width="300" height="86" rx="11" fill="#fff4e8" stroke="#d37c23" stroke-width="2"/>
+<text x="86" y="243" fill="#673b16" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">1S LiPo</text>
+<text x="86" y="271" fill="#825e3b" font-family="Arial, Helvetica, sans-serif" font-size="15">3.0–4.2V</text>
+<rect x="410" y="209" width="390" height="86" rx="11" fill="#fff4e8" stroke="#d37c23" stroke-width="2"/>
+<text x="426" y="243" fill="#673b16" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">TP4056 + protection</text>
+<text x="426" y="271" fill="#825e3b" font-family="Arial, Helvetica, sans-serif" font-size="15">B+/B− battery · OUT+/OUT− load</text>
+<rect x="860" y="209" width="300" height="86" rx="11" fill="#fff4e8" stroke="#d37c23" stroke-width="2"/>
+<text x="876" y="243" fill="#673b16" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">ON/OFF switch</text>
+<text x="876" y="271" fill="#825e3b" font-family="Arial, Helvetica, sans-serif" font-size="15">on protected output</text>
+<rect x="1210" y="209" width="300" height="86" rx="11" fill="#fff4e8" stroke="#d37c23" stroke-width="2"/>
+<text x="1226" y="243" fill="#673b16" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">5V boost</text>
+<text x="1226" y="271" fill="#825e3b" font-family="Arial, Helvetica, sans-serif" font-size="15">regulated · rated for servo peaks</text>
+<path d="M370 251 H398" fill="none" stroke="#d37c23" stroke-width="5" marker-end="url(#arrow)"/>
+<path d="M800 251 H848" fill="none" stroke="#d37c23" stroke-width="5" marker-end="url(#arrow)"/>
+<path d="M1160 251 H1198" fill="none" stroke="#d37c23" stroke-width="5" marker-end="url(#arrow)"/>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#d37c23"/></marker></defs>
+<text x="72" y="329" fill="#1c7559" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">3V3 from ESP → INMP441, VL53L0X, TTP223, ST7789</text>
+<text x="785" y="329" fill="#a65a1b" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">5V boost → ESP 5V/VIN, MAX98357A, all 4 servos</text>
+<text x="72" y="363" fill="#4c5967" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">COMMON GND → ESP, boost, every sensor, display, amplifier, LEDs, and servos</text>
+<text x="72" y="394" fill="#67788a" font-family="Arial, Helvetica, sans-serif" font-size="15">TP4056 is a charger, not a 5V boost. Verify polarity and 5V output with a meter before connecting the ESP32.</text>
+<rect x="760" y="460" width="280" height="1017" rx="18" fill="#142d42" stroke="#246b91" stroke-width="3"/>
+<text x="900" y="504" fill="white" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700">ESP32-S3</text>
+<text x="900" y="531" fill="#acc7d7" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16">WROOM-1 N16R8</text>
+<text x="900" y="561" fill="#8dacbd" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14">Logical GPIO terminals</text>
+<text x="900" y="588" fill="#8dacbd" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14">Check physical board labels</text>
+<rect x="45" y="465" width="620" height="235" rx="14" fill="white" stroke="#d5e0e8" stroke-width="2"/>
+<rect x="45" y="465" width="620" height="51" rx="14" fill="#168b70"/>
+<rect x="45" y="503" width="620" height="13" fill="#168b70"/>
+<text x="65" y="499" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">INMP441 · microphone</text>
+<text x="65" y="546" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">WS</text>
+<path d="M305 541 H760" stroke="#168b70" stroke-width="3"/>
+<circle cx="760" cy="541" r="5" fill="#168b70"/>
+<text x="746" y="535" text-anchor="end" fill="#168b70" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO4</text>
+<text x="65" y="566" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">SCK</text>
+<path d="M305 561 H760" stroke="#168b70" stroke-width="3"/>
+<circle cx="760" cy="561" r="5" fill="#168b70"/>
+<text x="746" y="555" text-anchor="end" fill="#168b70" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO5</text>
+<text x="65" y="586" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">SD</text>
+<path d="M305 581 H760" stroke="#168b70" stroke-width="3"/>
+<circle cx="760" cy="581" r="5" fill="#168b70"/>
+<text x="746" y="575" text-anchor="end" fill="#168b70" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO6</text>
+<rect x="57" y="659" width="596" height="31" rx="6" fill="#edf3f6"/>
+<text x="65" y="680" fill="#3c5365" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600">VCC → 3V3 · GND + L/R → GND</text>
+<rect x="45" y="725" width="620" height="235" rx="14" fill="white" stroke="#d5e0e8" stroke-width="2"/>
+<rect x="45" y="725" width="620" height="51" rx="14" fill="#2e76c8"/>
+<rect x="45" y="763" width="620" height="13" fill="#2e76c8"/>
+<text x="65" y="759" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">MAX98357A · amplifier</text>
+<text x="65" y="806" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">DIN</text>
+<path d="M305 801 H760" stroke="#2e76c8" stroke-width="3"/>
+<circle cx="760" cy="801" r="5" fill="#2e76c8"/>
+<text x="746" y="795" text-anchor="end" fill="#2e76c8" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO17</text>
+<text x="65" y="826" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">BCLK</text>
+<path d="M305 821 H760" stroke="#2e76c8" stroke-width="3"/>
+<circle cx="760" cy="821" r="5" fill="#2e76c8"/>
+<text x="746" y="815" text-anchor="end" fill="#2e76c8" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO16</text>
+<text x="65" y="846" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">LRC</text>
+<path d="M305 841 H760" stroke="#2e76c8" stroke-width="3"/>
+<circle cx="760" cy="841" r="5" fill="#2e76c8"/>
+<text x="746" y="835" text-anchor="end" fill="#2e76c8" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO15</text>
+<rect x="57" y="919" width="596" height="31" rx="6" fill="#edf3f6"/>
+<text x="65" y="940" fill="#3c5365" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600">VIN + SD → 5V · GND + GAIN → GND · speaker → SPK±</text>
+<rect x="45" y="985" width="620" height="235" rx="14" fill="white" stroke="#d5e0e8" stroke-width="2"/>
+<rect x="45" y="985" width="620" height="51" rx="14" fill="#0798aa"/>
+<rect x="45" y="1023" width="620" height="13" fill="#0798aa"/>
+<text x="65" y="1019" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">VL53L0X · anti-fall ToF</text>
+<text x="65" y="1066" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">SDA</text>
+<path d="M305 1061 H760" stroke="#0798aa" stroke-width="3"/>
+<circle cx="760" cy="1061" r="5" fill="#0798aa"/>
+<text x="746" y="1055" text-anchor="end" fill="#0798aa" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO1</text>
+<text x="65" y="1086" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">SCL</text>
+<path d="M305 1081 H760" stroke="#0798aa" stroke-width="3"/>
+<circle cx="760" cy="1081" r="5" fill="#0798aa"/>
+<text x="746" y="1075" text-anchor="end" fill="#0798aa" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO2</text>
+<rect x="57" y="1179" width="596" height="31" rx="6" fill="#edf3f6"/>
+<text x="65" y="1200" fill="#3c5365" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600">VCC → 3V3 · GND → GND</text>
+<rect x="45" y="1245" width="620" height="235" rx="14" fill="white" stroke="#d5e0e8" stroke-width="2"/>
+<rect x="45" y="1245" width="620" height="51" rx="14" fill="#c96c32"/>
+<rect x="45" y="1283" width="620" height="13" fill="#c96c32"/>
+<text x="65" y="1279" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">TTP223 · touch</text>
+<text x="65" y="1326" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">OUT</text>
+<path d="M305 1321 H760" stroke="#c96c32" stroke-width="3"/>
+<circle cx="760" cy="1321" r="5" fill="#c96c32"/>
+<text x="746" y="1315" text-anchor="end" fill="#c96c32" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO7</text>
+<rect x="57" y="1439" width="596" height="31" rx="6" fill="#edf3f6"/>
+<text x="65" y="1460" fill="#3c5365" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600">VCC → 3V3 · GND → GND</text>
+<rect x="1135" y="465" width="620" height="235" rx="14" fill="white" stroke="#d5e0e8" stroke-width="2"/>
+<rect x="1135" y="465" width="620" height="51" rx="14" fill="#764bd2"/>
+<rect x="1135" y="503" width="620" height="13" fill="#764bd2"/>
+<text x="1155" y="499" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">ST7789 · SPI display</text>
+<path d="M1040 541 H1495" stroke="#764bd2" stroke-width="3"/>
+<circle cx="1040" cy="541" r="5" fill="#764bd2"/>
+<text x="1054" y="535" fill="#764bd2" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO11</text>
+<text x="1515" y="546" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">MOSI</text>
+<path d="M1040 561 H1495" stroke="#764bd2" stroke-width="3"/>
+<circle cx="1040" cy="561" r="5" fill="#764bd2"/>
+<text x="1054" y="555" fill="#764bd2" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO12</text>
+<text x="1515" y="566" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">SCK</text>
+<path d="M1040 581 H1495" stroke="#764bd2" stroke-width="3"/>
+<circle cx="1040" cy="581" r="5" fill="#764bd2"/>
+<text x="1054" y="575" fill="#764bd2" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO10</text>
+<text x="1515" y="586" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">DC</text>
+<path d="M1040 601 H1495" stroke="#764bd2" stroke-width="3"/>
+<circle cx="1040" cy="601" r="5" fill="#764bd2"/>
+<text x="1054" y="595" fill="#764bd2" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO13</text>
+<text x="1515" y="606" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">CS</text>
+<path d="M1040 621 H1495" stroke="#764bd2" stroke-width="3"/>
+<circle cx="1040" cy="621" r="5" fill="#764bd2"/>
+<text x="1054" y="615" fill="#764bd2" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO14</text>
+<text x="1515" y="626" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">RST</text>
+<path d="M1040 641 H1495" stroke="#764bd2" stroke-width="3"/>
+<circle cx="1040" cy="641" r="5" fill="#764bd2"/>
+<text x="1054" y="635" fill="#764bd2" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO9*</text>
+<text x="1515" y="646" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">BL</text>
+<rect x="1147" y="659" width="596" height="31" rx="6" fill="#edf3f6"/>
+<text x="1155" y="680" fill="#3c5365" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600">VCC → 3V3 · GND → GND</text>
+<rect x="1135" y="725" width="620" height="235" rx="14" fill="white" stroke="#d5e0e8" stroke-width="2"/>
+<rect x="1135" y="725" width="620" height="51" rx="14" fill="#c99118"/>
+<rect x="1135" y="763" width="620" height="13" fill="#c99118"/>
+<text x="1155" y="759" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">LEDs · left and right</text>
+<path d="M1040 801 H1495" stroke="#c99118" stroke-width="3"/>
+<circle cx="1040" cy="801" r="5" fill="#c99118"/>
+<text x="1054" y="795" fill="#c99118" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO3*</text>
+<text x="1515" y="806" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">Left +</text>
+<path d="M1040 821 H1495" stroke="#c99118" stroke-width="3"/>
+<circle cx="1040" cy="821" r="5" fill="#c99118"/>
+<text x="1054" y="815" fill="#c99118" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO18</text>
+<text x="1515" y="826" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">Right +</text>
+<rect x="1147" y="919" width="596" height="31" rx="6" fill="#edf3f6"/>
+<text x="1155" y="940" fill="#3c5365" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600">Each GPIO → 330 Ω resistor → LED + · LED − → GND</text>
+<rect x="1135" y="985" width="620" height="235" rx="14" fill="white" stroke="#d5e0e8" stroke-width="2"/>
+<rect x="1135" y="985" width="620" height="51" rx="14" fill="#cc5171"/>
+<rect x="1135" y="1023" width="620" height="13" fill="#cc5171"/>
+<text x="1155" y="1019" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">Wheel servos · 360°</text>
+<path d="M1040 1061 H1495" stroke="#cc5171" stroke-width="3"/>
+<circle cx="1040" cy="1061" r="5" fill="#cc5171"/>
+<text x="1054" y="1055" fill="#cc5171" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO47</text>
+<text x="1515" y="1066" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">Left signal</text>
+<path d="M1040 1081 H1495" stroke="#cc5171" stroke-width="3"/>
+<circle cx="1040" cy="1081" r="5" fill="#cc5171"/>
+<text x="1054" y="1075" fill="#cc5171" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO45*</text>
+<text x="1515" y="1086" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">Right signal</text>
+<rect x="1147" y="1179" width="596" height="31" rx="6" fill="#edf3f6"/>
+<text x="1155" y="1200" fill="#3c5365" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600">Both V+ → external 5V · both GND → common GND</text>
+<rect x="1135" y="1245" width="620" height="235" rx="14" fill="white" stroke="#d5e0e8" stroke-width="2"/>
+<rect x="1135" y="1245" width="620" height="51" rx="14" fill="#a14ca7"/>
+<rect x="1135" y="1283" width="620" height="13" fill="#a14ca7"/>
+<text x="1155" y="1279" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">Arm + neck servos · 180°</text>
+<path d="M1040 1321 H1495" stroke="#a14ca7" stroke-width="3"/>
+<circle cx="1040" cy="1321" r="5" fill="#a14ca7"/>
+<text x="1054" y="1315" fill="#a14ca7" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO20*</text>
+<text x="1515" y="1326" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">Arm signal</text>
+<path d="M1040 1341 H1495" stroke="#a14ca7" stroke-width="3"/>
+<circle cx="1040" cy="1341" r="5" fill="#a14ca7"/>
+<text x="1054" y="1335" fill="#a14ca7" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">GPIO21</text>
+<text x="1515" y="1346" fill="#25374a" font-family="Arial, Helvetica, sans-serif" font-size="17">Neck signal</text>
+<rect x="1147" y="1439" width="596" height="31" rx="6" fill="#edf3f6"/>
+<text x="1155" y="1460" fill="#3c5365" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600">Both V+ → external 5V · both GND → common GND</text>
+<rect x="45" y="1501" width="1710" height="64" rx="10" fill="#fff0d8"/>
+<text x="65" y="1526" fill="#77511c" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700">* Check before powering on: GPIO20 is native USB D+; GPIO3 and GPIO45 are strapping pins; GPIO9 backlight may need a transistor driver.</text>
+<text x="65" y="1550" fill="#77511c" font-family="Arial, Helvetica, sans-serif" font-size="15">Default firmware uses ST7789 + VL53L0X + 4 servos. ST7735/VL6180X need matching build options. L298N/HC-SR04 are alternatives, not shown.</text>
 </svg>
