@@ -60,7 +60,10 @@ jobs:
           CHANGED=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA")
           echo -e "Changed files:\n$CHANGED"
 
-          SELECTED=$(printf '%s\n' "$CHANGED" | python scripts/build.py --select-changed)
+          # Dedicated S31 jobs exercise workflow edits. Avoid expanding the
+          # normal board matrix to every board for this workflow-only change.
+          BUILD_INPUT=$(printf '%s\n' "$CHANGED" | sed '/^\.github\/workflows\/build\.yml$/d')
+          SELECTED=$(printf '%s\n' "$BUILD_INPUT" | python scripts/build.py --select-changed)
           echo "variants=$SELECTED" >> $GITHUB_OUTPUT
 
   build:
@@ -105,7 +108,10 @@ jobs:
             full_name: espressif-esp32-s31-korvo-1
     runs-on: ubuntu-latest
     container:
-      image: espressif/idf:release-v6.1
+      # Known-good image from the successful 2026-08-27 main build. The
+      # floating release-v6.1 tag later changed its GDMA API and broke the
+      # currently pinned 78/uart-uhci dependency.
+      image: espressif/idf@sha256:15899e7931ed3e81d03c4a8c1788e0674dcf1281f50b8f1ce573d6670ddfa657
     steps:
       - name: Checkout
         uses: actions/checkout@v4
