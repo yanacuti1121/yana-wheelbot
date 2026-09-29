@@ -26,23 +26,34 @@ phần voice AI + màn hình biểu cảm có sẵn của nền tảng.
 | | *hoặc* ST7735 (build option) | Xem "Chọn biến thể lúc build" |
 | Nút Boot | có sẵn trên board ESP32-S3 (GPIO0) | Không cần thêm |
 | Nguồn | Pin Li-ion/LiPo 3.7V, ~2000mAh | |
-| | Mạch sạc + tăng áp 5V TP4056 Type-C | |
+| | Mạch sạc TP4056 Type-C có bảo vệ + mạch tăng áp 5V riêng | TP4056 không tự tăng áp |
 | | Công tắc nguồn ON/OFF | |
 
-**Lưu ý nguồn:** loa khuếch đại và 2 servo bánh xe cần nguồn 5V riêng đủ
-mạnh (không lấy thẳng từ bộ ổn áp 3.3V của MCU) — một mạch tăng áp như
-TP4056 lo được việc này từ 1 cell LiPo 3.7V. Tất cả GND (MCU, amp, servo,
-cảm biến) vẫn phải nối chung.
+**Lưu ý nguồn:** ampli loa và cả 4 servo cần đường 5V ổn áp đủ mạnh, không
+lấy từ chân 3V3 của ESP32. TP4056 sạc/bảo vệ cell LiPo 3.7V; cần **mạch
+tăng áp 5V riêng**. Nối chung GND của ESP32, nguồn, ampli, servo và cảm
+biến.
 
 ## Sơ đồ đấu nối (mặc định)
 
-![Sơ đồ đấu nối Yana Wheelbot](wiring-diagram.svg)
+![Sơ đồ đấu nối đầy đủ của Yana Wheelbot](wiring-diagram.svg)
 
-Chân GPIO mặc định lấy theo sơ đồ đấu nối công khai của
-[KST AI Robot](https://ai.kenhsangtao.com/) (xem mục "Credit" bên dưới) —
-mọi chân dưới đây đều đã xác nhận khớp với sơ đồ đó, trừ backlight màn hình
-là tự chọn riêng của dự án này (đánh dấu ở cột Ghi chú). Toàn bộ định nghĩa
-nằm ở `config.h`.
+[Mở sơ đồ đầy đủ](wiring-diagram.svg) ·
+[bảng tra từng chân](wiring-pin-table.svg) ·
+[ảnh tham khảo kiểu KST](wiring-kst-reference.png)
+
+Ảnh tham khảo được thêm để so sánh: dùng ST7735/VL6180X, nối BL vào 3V3
+và để GPIO20/21 chưa chốt. **Không đấu firmware mặc định theo ảnh tham
+khảo đó.** Board này mặc định dùng ST7789/VL53L0X, điều khiển BL ở GPIO9,
+và chạy servo tay/cổ ở GPIO20/21. Muốn dùng ST7735 hoặc VL6180X phải bật
+tùy chọn build tương ứng.
+
+Phần lớn số GPIO tín hiệu đã đối chiếu với sơ đồ công khai của
+[KST AI Robot](https://ai.kenhsangtao.com/) (xem mục "Credit"). Ảnh tham
+chiếu dùng **nút bấm** ở GPIO20/21, còn dự án này gán hai chân đó cho
+servo tay/cổ. BL của ảnh tham chiếu nối 3V3, còn firmware này dùng GPIO9
+để điều khiển độ sáng. Mẫu màn hình và cảm biến mặc định cũng khác.
+`config.h` là bản đồ chân thực tế của firmware này.
 
 | Bộ phận | Tín hiệu | GPIO | Ghi chú |
 |---|---|---|---|
@@ -80,6 +91,11 @@ tool, lưu vào NVS, không cần nạp lại firmware — các giá trị trên
 
 **Không dùng GPIO36/GPIO37** — dành riêng cho PSRAM trên module
 ESP32-S3-WROOM-1 N16R8.
+
+**Kiểm tra board trước khi cấp nguồn:** GPIO20 là chân USB D+ gốc của
+ESP32-S3; GPIO3 và GPIO45 là chân strapping lúc khởi động. Tín hiệu BL
+GPIO9 có thể cần transistor/MOSFET tùy module màn hình; đừng mặc định
+GPIO cấp trực tiếp được dòng cho LED nền.
 
 ## Chọn biến thể lúc build
 
@@ -178,18 +194,21 @@ lệnh MCP đồng bộ; không đụng vào code nền tảng dùng chung
 
 ## Credit
 
-Chân GPIO mặc định trong `config.h` (motor, ToF, LED, tay/cổ, cảm biến chạm,
-mic, loa, màn hình) được căn theo sơ đồ đấu nối công khai và trang firmware
+Phần lớn số GPIO tín hiệu trong `config.h` (motor, ToF, LED, cảm biến chạm,
+mic, loa, SPI màn hình) được căn theo sơ đồ đấu nối công khai và trang firmware
 center của [KST AI Robot](https://ai.kenhsangtao.com/)
 (`kenhsangtao.github.io/robotai`) — một robot ESP32-S3 thật, do cộng đồng
-xây dựng, từ kênh "Kênh Sáng Tạo" (Việt Nam), có tính năng gần giống hệt
-(driver động cơ chọn được, servo tay/cổ, chống rơi ToF, LED đôi, cảm biến
-chạm, voice AI). Chỉ lấy **số GPIO** và **tên linh kiện công khai** từ trang
+xây dựng, từ kênh "Kênh Sáng Tạo" (Việt Nam), có tính năng tương tự
+(driver động cơ chọn được, chống rơi ToF, LED đôi, cảm biến chạm, voice AI).
+Dự án này dùng servo tay/cổ ở GPIO20/21, nơi ảnh tham chiếu ghi nút bấm;
+GPIO9 điều khiển BL cũng là lựa chọn riêng. Chỉ lấy **số GPIO** và
+**tên linh kiện công khai** từ trang
 của họ; không lấy bất kỳ dòng code, hình ảnh, hay văn bản nào từ firmware
 (một file binary đóng, không nêu license cho phép tái sử dụng) hay website
-của họ. `wiring-diagram.svg` ở trên là sơ đồ gốc do dự án này tự vẽ lại từ
-các dữ kiện công khai đó — không phải bản sao ảnh sơ đồ của họ. Firmware,
-board definition, và MCP tool ở đây được viết độc lập.
+của họ. `wiring-diagram.svg` và `wiring-pin-table.svg` là sơ đồ riêng của
+board này; `wiring-kst-reference.png` là bảng so sánh được tạo độc lập,
+không phải ảnh gốc của họ. Firmware, board definition và MCP tool ở đây
+được viết độc lập.
 
 ## Chưa xác minh trên phần cứng thật
 

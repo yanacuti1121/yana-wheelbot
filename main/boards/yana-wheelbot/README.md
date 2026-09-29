@@ -27,23 +27,35 @@ voice AI and animated-face display.
 | | *or* ST7735 (build option) | See "Build-time variant selection" |
 | Boot button | already on the ESP32-S3 dev board (GPIO0) | Nothing extra needed |
 | Power | Li-ion/LiPo 3.7V, ~2000mAh | |
-| | TP4056 Type-C charge + 5V boost module | |
+| | TP4056 Type-C charger with protection + separate 5V boost converter | A TP4056 does not boost voltage |
 | | ON/OFF power switch | |
 
-**Power note:** the speaker amp and both wheel servos need their own strong
-5V rail (not powered straight off the MCU's 3.3V regulator) — a boost
-module like TP4056 handles this from a single 3.7V LiPo cell. All grounds
-(MCU, amp, servos, sensors) must still be tied together.
+**Power note:** the speaker amp and all four servos need a strong regulated
+5V rail (not the MCU's 3.3V regulator). A TP4056 charges/protects a single
+3.7V LiPo cell; a **separate** boost converter supplies 5V. All grounds
+(MCU, amp, servos, sensors) must be tied together.
 
 ## Default wiring
 
-![Yana Wheelbot wiring diagram](wiring-diagram.svg)
+![Complete Yana Wheelbot default wiring diagram](wiring-diagram.svg)
 
-Default GPIO pins are taken from the [KST AI Robot](https://ai.kenhsangtao.com/)'s
-publicly published wiring diagram (see the "Credit" section below) — every
-pin below is confirmed against that diagram except the display backlight,
-which is this project's own free-pin pick (flagged in the Notes column).
-All definitions live in `config.h`.
+[Open the full-size diagram](wiring-diagram.svg) ·
+[pin-by-pin table](wiring-pin-table.svg) ·
+[KST-style reference card](wiring-kst-reference.png)
+
+The reference card is included for comparison. It shows ST7735/VL6180X,
+ties BL to 3V3, and leaves GPIO20/21 undecided. **Do not use that card as
+the default firmware wiring.** This board defaults to ST7789/VL53L0X,
+controls BL on GPIO9, and drives arm/neck servos on GPIO20/21. Choose the
+matching build options before using ST7735 or VL6180X.
+
+Most signal GPIO numbers were cross-checked against the
+[KST AI Robot](https://ai.kenhsangtao.com/)'s public wiring diagram (see
+"Credit" below). The reference image uses **buttons** at GPIO20/21, while
+this project assigns those pins to arm/neck servos. Its BL goes to 3V3,
+while this project uses GPIO9 for software brightness control. The default
+sensor and display models also differ. `config.h` defines the firmware's
+actual pin map.
 
 | Part | Signal | GPIO | Notes |
 |---|---|---|---|
@@ -81,6 +93,11 @@ above are only the first-boot defaults.
 
 **Do not use GPIO36/GPIO37** — reserved for PSRAM on the ESP32-S3-WROOM-1
 N16R8 module.
+
+**Check the board before powering up:** GPIO20 is the ESP32-S3's native USB
+D+ pin, and GPIO3/GPIO45 are boot strapping pins. The GPIO9 backlight
+signal may need a transistor/MOSFET driver depending on the actual display
+module; do not assume the GPIO can supply the LED current directly.
 
 ## Build-time variant selection
 
@@ -180,19 +197,21 @@ per synchronous MCP call; it does not touch shared platform code
 
 ## Credit
 
-The GPIO defaults in `config.h` (motor, ToF, LED, arm/neck, touch, mic,
-speaker, display pins) are aligned with the
+Most signal GPIO numbers in `config.h` (motor, ToF, LED, touch, mic,
+speaker, display SPI pins) were aligned with the
 [KST AI Robot](https://ai.kenhsangtao.com/)'s publicly published wiring
 diagram and firmware center (`kenhsangtao.github.io/robotai`) — a real,
 community-built ESP32-S3 robot from the Vietnamese "Kênh Sáng Tạo" channel
-with a nearly identical feature set (dual motor backend, arm/neck servos,
-ToF anti-fall, dual LED, touch sensor, voice AI). Only pin *numbers* and
+with a similar feature set (dual motor backend, ToF anti-fall, dual LED,
+touch sensor, voice AI). This project uses arm/neck servos at GPIO20/21,
+where the reference image shows buttons; GPIO9 backlight control is also
+specific to this project. Only pin *numbers* and
 publicly listed part names were used; no code, artwork, or text was copied
 from their firmware (a closed binary with no stated reuse license) or their
-website. `wiring-diagram.svg` above is this project's own original diagram,
-redrawn from those public facts — not a copy of their diagram image. This
-board's firmware, board definition, and MCP tools are written
-independently.
+website. `wiring-diagram.svg` and `wiring-pin-table.svg` are original
+diagrams for this board; `wiring-kst-reference.png` is an independently
+generated comparison card, not their original image. This board's firmware,
+board definition, and MCP tools are written independently.
 
 ## Not yet verified on real hardware
 

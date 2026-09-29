@@ -9,7 +9,16 @@ riêng của Yana từ nền firmware XiaoZhi AI Chatbot.
 ## Yana Wheelbot
 
 <img src="main/boards/yana-wheelbot/chassis/chassis-render.png" alt="Chassis Yana Wheelbot, render từ OpenSCAD" width="480">
-<img src="main/boards/yana-wheelbot/wiring-diagram.svg" alt="Sơ đồ đấu nối Yana Wheelbot" width="480">
+<img src="main/boards/yana-wheelbot/wiring-diagram.svg" alt="Sơ đồ đấu nối đầy đủ của Yana Wheelbot, gồm nguồn và các chân GPIO" width="960">
+
+**Ảnh đấu dây:** [sơ đồ đầy đủ theo firmware mặc định](main/boards/yana-wheelbot/wiring-diagram.svg) ·
+[bảng từng chân](main/boards/yana-wheelbot/wiring-pin-table.svg) ·
+[ảnh tham khảo theo KST](main/boards/yana-wheelbot/wiring-kst-reference.png).
+Ảnh tham khảo dùng ST7735/VL6180X, nối BL vào 3V3 và để GPIO20/21 chưa
+chốt. Đó **không phải** cấu hình firmware mặc định của repo: repo dùng
+ST7789/VL53L0X, điều khiển BL bằng GPIO9 và dùng GPIO20/21 cho servo tay/cổ.
+Khi lắp firmware này, hãy theo sơ đồ đầy đủ hoặc bảng đấu dây trong README
+của board.
 
 - Di chuyển differential-drive, driver động cơ chọn được lúc chạy (servo
   xoay liên tục hoặc L298N DC)
